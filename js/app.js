@@ -5,6 +5,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  const hideDecorativeIcons = (root = document) => {
+    root.querySelectorAll('i').forEach(icon => icon.setAttribute('aria-hidden', 'true'));
+  };
+
   /* ------------------------------------------------------------------------
      1. CAPABILITY TABS SWITCHER
      ------------------------------------------------------------------------ */
@@ -12,19 +16,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const capabilityTabBtns = capabilitiesSection?.querySelectorAll('[data-capability-tab]') ?? [];
   const capabilityTabPanes = capabilitiesSection?.querySelectorAll('.tab-pane') ?? [];
 
-  capabilityTabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+  function activateCapabilityTab(btn, moveFocus = false) {
       const targetTab = btn.getAttribute('data-capability-tab');
 
       capabilityTabBtns.forEach(tabBtn => {
         tabBtn.classList.remove('active');
         tabBtn.setAttribute('aria-selected', 'false');
+        tabBtn.tabIndex = -1;
       });
       capabilityTabPanes.forEach(pane => pane.classList.remove('active'));
 
       btn.classList.add('active');
       btn.setAttribute('aria-selected', 'true');
+      btn.tabIndex = 0;
       document.getElementById(targetTab)?.classList.add('active');
+      if (moveFocus) btn.focus();
+  }
+
+  capabilityTabBtns.forEach((btn, index) => {
+    btn.addEventListener('click', () => activateCapabilityTab(btn));
+    btn.addEventListener('keydown', event => {
+      const lastIndex = capabilityTabBtns.length - 1;
+      let targetIndex;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') targetIndex = index === lastIndex ? 0 : index + 1;
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') targetIndex = index === 0 ? lastIndex : index - 1;
+      if (event.key === 'Home') targetIndex = 0;
+      if (event.key === 'End') targetIndex = lastIndex;
+      if (targetIndex === undefined) return;
+      event.preventDefault();
+      activateCapabilityTab(capabilityTabBtns[targetIndex], true);
     });
   });
 
@@ -102,17 +122,20 @@ document.addEventListener('DOMContentLoaded', () => {
     currentFormation.forEach(player => {
       const positionCode = player.name.split(' ')[0];
       const positionInsight = roleInsights[positionCode];
-      const node = document.createElement('div');
+      const node = document.createElement('button');
       node.className = 'player-node';
+      node.type = 'button';
       node.style.left = `${player.pos.x}%`;
       node.style.top = `${player.pos.y}%`;
       node.textContent = player.id;
       node.setAttribute('title', `${player.name} — ${positionInsight}`);
+      node.setAttribute('aria-label', `Player ${player.id}: ${player.name}. ${positionInsight}`);
 
       node.addEventListener('click', () => {
         if (playerTooltip) {
           playerTooltip.innerHTML = `<i class="fa-solid fa-futbol text-emerald"></i> <strong>#${player.id} ${player.name}:</strong> ${positionInsight}`;
           playerTooltip.style.borderColor = 'var(--accent-emerald)';
+          hideDecorativeIcons(playerTooltip);
         }
       });
 
@@ -122,8 +145,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   formationBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      formationBtns.forEach(b => b.classList.remove('active'));
+      formationBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
       const formKey = btn.getAttribute('data-formation');
       renderFormation(formKey);
     });
@@ -182,6 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (snookerInsightEl) {
         snookerInsightEl.innerHTML = `<i class="fa-solid fa-circle-check text-emerald"></i> <strong>Red potted (+1).</strong> The black is now the next ball on the table.`;
+        hideDecorativeIcons(snookerInsightEl);
       }
     });
   }
@@ -197,6 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (snookerInsightEl) {
         snookerInsightEl.innerHTML = `<i class="fa-solid fa-star text-amber"></i> <strong>Black potted (+7).</strong> Break: ${snookerBreak} points. The next ball is red.`;
+        hideDecorativeIcons(snookerInsightEl);
       }
     });
   }
@@ -211,6 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (snookerInsightEl) {
         snookerInsightEl.innerHTML = `<i class="fa-solid fa-lightbulb text-amber"></i> <strong>Table plan:</strong> Pot the red, then leave the cue ball in position for the black.`;
+        hideDecorativeIcons(snookerInsightEl);
       }
     });
   }
@@ -277,12 +307,18 @@ document.addEventListener('DOMContentLoaded', () => {
         routeStoryPointsEl.appendChild(marker);
       });
     }
+
+    hideDecorativeIcons();
   }
 
   routeTabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      routeTabs.forEach(t => t.classList.remove('active'));
+      routeTabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-pressed', 'false');
+      });
       tab.classList.add('active');
+      tab.setAttribute('aria-pressed', 'true');
       const rKey = tab.getAttribute('data-route');
       renderRoute(rKey);
     });
@@ -298,6 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cmdKModal = document.getElementById('cmd-k-modal');
   const cmdKInput = document.getElementById('cmd-k-input');
   const cmdKResults = document.getElementById('cmd-k-results');
+  let cmdKTrigger = null;
 
   const commands = [
     { title: 'Profile Summary', subtitle: 'Frankie (Yifan) Zhu - global transformation and technology leader', target: '#hero', icon: 'fa-user' },
@@ -312,15 +349,19 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: 'Share Profile QR Code', subtitle: 'Display a QR code for sharing this public profile', action: 'QR_MODE', icon: 'fa-qrcode' }
   ];
 
-  function openCmdK() {
+  function openCmdK(trigger = document.activeElement) {
+    cmdKTrigger = trigger;
     cmdKModal?.classList.remove('hidden');
-    cmdKInput?.focus();
+    cmdKModal?.setAttribute('aria-hidden', 'false');
     renderCmdResults('');
+    cmdKInput?.focus();
   }
 
-  function closeCmdK() {
+  function closeCmdK({ returnFocus = true } = {}) {
     cmdKModal?.classList.add('hidden');
+    cmdKModal?.setAttribute('aria-hidden', 'true');
     if (cmdKInput) cmdKInput.value = '';
+    if (returnFocus) cmdKTrigger?.focus();
   }
 
   function renderCmdResults(filterText) {
@@ -338,7 +379,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     filtered.forEach((cmd, idx) => {
-      const item = document.createElement('div');
+      const item = document.createElement('button');
+      item.type = 'button';
       item.className = `cmd-item ${idx === 0 ? 'active' : ''}`;
       item.innerHTML = `
         <div style="display:flex; align-items:center; gap:0.8rem">
@@ -352,20 +394,22 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       item.addEventListener('click', () => {
-        closeCmdK();
+        closeCmdK({ returnFocus: false });
         if (cmd.target) {
           document.querySelector(cmd.target)?.scrollIntoView({ behavior: 'smooth' });
         } else if (cmd.action === 'QR_MODE') {
-          document.getElementById('qr-modal')?.classList.remove('hidden');
+          openQR(cmdKTrigger);
         }
       });
 
       cmdKResults.appendChild(item);
     });
+
+    hideDecorativeIcons(cmdKResults);
   }
 
-  cmdKBtn?.addEventListener('click', openCmdK);
-  footerCmdBtn?.addEventListener('click', openCmdK);
+  cmdKBtn?.addEventListener('click', () => openCmdK(cmdKBtn));
+  footerCmdBtn?.addEventListener('click', () => openCmdK(footerCmdBtn));
 
   cmdKInput?.addEventListener('input', (e) => {
     renderCmdResults(e.target.value);
@@ -377,8 +421,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (cmdKModal?.classList.contains('hidden')) openCmdK();
       else closeCmdK();
     } else if (e.key === 'Escape') {
-      closeCmdK();
-      document.getElementById('qr-modal')?.classList.add('hidden');
+      if (!qrModal?.classList.contains('hidden')) closeQR();
+      else if (!cmdKModal?.classList.contains('hidden')) closeCmdK();
     }
   });
 
@@ -393,16 +437,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const qrCloseBtn = document.getElementById('qr-close-btn');
   const heroQrBtn = document.getElementById('hero-qr-btn');
   const footerQrBtn = document.getElementById('footer-qr-btn');
+  let qrTrigger = null;
 
-  function openQR() {
+  function openQR(trigger = document.activeElement) {
+    qrTrigger = trigger;
     qrModal?.classList.remove('hidden');
+    qrModal?.setAttribute('aria-hidden', 'false');
+    qrCloseBtn?.focus();
   }
 
-  heroQrBtn?.addEventListener('click', openQR);
-  footerQrBtn?.addEventListener('click', openQR);
-  qrCloseBtn?.addEventListener('click', () => qrModal?.classList.add('hidden'));
+  function closeQR() {
+    qrModal?.classList.add('hidden');
+    qrModal?.setAttribute('aria-hidden', 'true');
+    qrTrigger?.focus();
+  }
+
+  heroQrBtn?.addEventListener('click', () => openQR(heroQrBtn));
+  footerQrBtn?.addEventListener('click', () => openQR(footerQrBtn));
+  qrCloseBtn?.addEventListener('click', closeQR);
   qrModal?.addEventListener('click', (e) => {
-    if (e.target === qrModal) qrModal?.classList.add('hidden');
+    if (e.target === qrModal) closeQR();
   });
 
+  hideDecorativeIcons();
 });

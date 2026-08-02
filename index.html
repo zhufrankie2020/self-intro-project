@@ -50,7 +50,7 @@
       </nav>
 
       <div class="nav-actions">
-        <button id="cmd-k-btn" class="btn-icon-label" title="Search (Cmd+K)">
+        <button id="cmd-k-btn" class="btn-icon-label" type="button" title="Search (Cmd+K)" aria-haspopup="dialog" aria-controls="cmd-k-modal">
           <i class="fa-solid fa-magnifying-glass"></i>
           <span class="kbd-shortcut"><kbd>⌘</kbd><kbd>K</kbd></span>
         </button>
@@ -110,7 +110,7 @@
             <a href="#hobbies" class="btn-outline">
               <i class="fa-solid fa-gamepad"></i> Try Interactive Hobbies
             </a>
-            <button id="hero-qr-btn" class="btn-ghost">
+            <button id="hero-qr-btn" class="btn-ghost" type="button" aria-haspopup="dialog" aria-controls="qr-modal">
               <i class="fa-solid fa-qrcode"></i> QR Code
             </button>
           </div>
@@ -128,7 +128,7 @@
               </div>
             </div>
             <div class="profile-info">
-              <h3>Frankie (Yifan) Zhu</h3>
+              <p class="profile-name">Frankie (Yifan) Zhu</p>
               <p class="profile-role">Global Transformation &amp; Technology Leader</p>
               <div class="tag-cloud">
                 <span class="tag">GenAI Dev-Sec-Ops</span>
@@ -192,7 +192,7 @@
               <span class="company">Global remit</span>
               <span class="period">Current</span>
             </div>
-            <h4>Global Transformation &amp; Delivery Leadership</h4>
+            <h3>Global Transformation &amp; Delivery Leadership</h3>
             <p>Set direction, align stakeholders, mobilise delivery, strengthen governance, validate benefits and lead teams through complex change.</p>
           </div>
         </div>
@@ -204,7 +204,7 @@
               <span class="company">Global remit</span>
               <span class="period">2025–2026</span>
             </div>
-            <h4>GenAI Platform Transformation</h4>
+            <h3>GenAI Platform Transformation</h3>
             <p>Built a global AI operating and governance model, supporting a reported 20% productivity improvement and 4.8/5 user satisfaction.</p>
           </div>
         </div>
@@ -216,7 +216,7 @@
               <span class="company">Mars</span>
               <span class="period">2018–2025</span>
             </div>
-            <h4>Customer Experience Transformation</h4>
+            <h3>Customer Experience Transformation</h3>
             <p>Increased digital-channel adoption from 0% to 80%, achieved 4.9/5 global user CSAT and reached the top 30th percentile for IT happiness.</p>
           </div>
         </div>
@@ -228,7 +228,7 @@
               <span class="company">Mars</span>
               <span class="period">2016–2018</span>
             </div>
-            <h4>IT Operations Transformation</h4>
+            <h3>IT Operations Transformation</h3>
             <p>Scaled support from 13,000 to 23,000 users and tripled Tier 1 resolution through a redesigned operating model.</p>
           </div>
         </div>
@@ -240,7 +240,7 @@
               <span class="company">Mars &amp; HP China</span>
               <span class="period">2004–2015</span>
             </div>
-            <h4>SAP Implementation &amp; Application Services</h4>
+            <h3>SAP Implementation &amp; Application Services</h3>
             <p>Delivered SAP implementations across Asia and managed global services for business-critical supply chain applications.</p>
           </div>
         </div>
@@ -264,10 +264,10 @@
           <button id="strategy-tab" class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="strategy-panel" data-capability-tab="strategy-panel">
             <i class="fa-solid fa-bullseye"></i> Strategy & Outcomes
           </button>
-          <button id="delivery-tab" class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="delivery-panel" data-capability-tab="delivery-panel">
+          <button id="delivery-tab" class="tab-btn" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="delivery-panel" data-capability-tab="delivery-panel">
             <i class="fa-solid fa-people-group"></i> People, Process & Delivery
           </button>
-          <button id="tools-tab" class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tools-panel" data-capability-tab="tools-panel">
+          <button id="tools-tab" class="tab-btn" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="tools-panel" data-capability-tab="tools-panel">
             <i class="fa-solid fa-toolbox"></i> Tools & Technology
           </button>
         </div>
@@ -369,9 +369,9 @@
           <div class="soccer-widget football-widget" aria-label="Interactive football formation">
             <div class="formation-controls">
               <span>Select formation:</span>
-              <button class="formation-btn active" data-formation="433">4-3-3 Attack</button>
-              <button class="formation-btn" data-formation="4231">4-2-3-1 Control</button>
-              <button class="formation-btn" data-formation="352">3-5-2 Dynamic</button>
+              <button class="formation-btn active" type="button" aria-pressed="true" data-formation="433">4-3-3 Attack</button>
+              <button class="formation-btn" type="button" aria-pressed="false" data-formation="4231">4-2-3-1 Control</button>
+              <button class="formation-btn" type="button" aria-pressed="false" data-formation="352">3-5-2 Dynamic</button>
             </div>
             <div class="pitch-container" id="pitch-container">
               <div class="pitch-line center-line"></div>
@@ -380,7 +380,7 @@
               <div class="pitch-line penalty-box bottom"></div>
               <div id="pitch-players-layer"></div>
             </div>
-            <div id="player-tooltip" class="player-info-box">
+            <div id="player-tooltip" class="player-info-box" aria-live="polite">
               <i class="fa-solid fa-circle-info"></i> Select a player to see what that position does on the pitch.
             </div>
           </div>
@@ -427,11 +427,11 @@
               </div>
             </div>
             <div class="snooker-actions">
-              <button id="pot-red-btn" class="btn-snooker red"><i class="fa-solid fa-bullseye"></i> Pot red (1pt)</button>
-              <button id="pot-black-btn" class="btn-snooker black" disabled><i class="fa-solid fa-star"></i> Pot black (7pt)</button>
-              <button id="reset-snooker-btn" class="btn-snooker-reset"><i class="fa-solid fa-rotate-left"></i> Reset table</button>
+              <button id="pot-red-btn" class="btn-snooker red" type="button"><i class="fa-solid fa-bullseye"></i> Pot red (1pt)</button>
+              <button id="pot-black-btn" class="btn-snooker black" type="button" disabled><i class="fa-solid fa-star"></i> Pot black (7pt)</button>
+              <button id="reset-snooker-btn" class="btn-snooker-reset" type="button"><i class="fa-solid fa-rotate-left"></i> Reset table</button>
             </div>
-            <div id="snooker-feedback" class="snooker-insight">
+            <div id="snooker-feedback" class="snooker-insight" aria-live="polite">
               <i class="fa-solid fa-lightbulb text-amber"></i> <strong>Table plan:</strong> Pot the red, then leave the cue ball in position for the black.
             </div>
           </div>
@@ -455,17 +455,17 @@
 
           <div class="adv-widget">
             <div class="adv-route-selector" aria-label="Select a motorbike journey">
-              <button class="route-tab active" data-route="tibet-2023">
+              <button class="route-tab active" type="button" aria-pressed="true" data-route="tibet-2023">
                 <i class="fa-solid fa-mountain"></i> Tibet and Lhasa
               </button>
-              <button class="route-tab" data-route="sichuan-2025">
+              <button class="route-tab" type="button" aria-pressed="false" data-route="sichuan-2025">
                 <i class="fa-solid fa-road"></i> Western Sichuan
               </button>
-              <button class="route-tab" data-route="hulunbuir-2026">
+              <button class="route-tab" type="button" aria-pressed="false" data-route="hulunbuir-2026">
                 <i class="fa-solid fa-compass"></i> Hulunbuir 2026
               </button>
             </div>
-            <div class="adv-display-grid">
+            <div class="adv-display-grid" aria-live="polite">
               <div class="adv-card-info" id="adv-route-details">
                 <h4>Tibet and Lhasa</h4>
                 <span class="completed-status">2023 — Completed</span>
@@ -532,18 +532,19 @@
       <div class="footer-links">
         <a href="#education" class="footer-link"><i class="fa-solid fa-graduation-cap"></i> Education</a>
         <a href="#connect" class="footer-link"><i class="fa-solid fa-paper-plane"></i> Connect</a>
-        <button id="footer-cmd-btn" class="footer-link"><i class="fa-solid fa-keyboard"></i> Cmd+K Menu</button>
-        <button id="footer-qr-btn" class="footer-link"><i class="fa-solid fa-qrcode"></i> Show QR Code</button>
+        <button id="footer-cmd-btn" class="footer-link" type="button" aria-haspopup="dialog" aria-controls="cmd-k-modal"><i class="fa-solid fa-keyboard"></i> Cmd+K Menu</button>
+        <button id="footer-qr-btn" class="footer-link" type="button" aria-haspopup="dialog" aria-controls="qr-modal"><i class="fa-solid fa-qrcode"></i> Show QR Code</button>
       </div>
     </div>
   </footer>
 
   <!-- COMMAND PALETTE (CMD+K) MODAL -->
-  <div id="cmd-k-modal" class="modal-backdrop hidden">
+  <div id="cmd-k-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="cmd-k-title">
     <div class="cmd-k-dialog glass-card">
+      <h2 id="cmd-k-title" class="sr-only">Profile command menu</h2>
       <div class="cmd-k-search-box">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="cmd-k-input" placeholder="Type a command or search (e.g. 'career', 'education', 'soccer', 'connect')..." autocomplete="off">
+        <input type="text" id="cmd-k-input" aria-label="Search profile commands" placeholder="Type a command or search (e.g. 'career', 'education', 'soccer', 'connect')..." autocomplete="off">
         <kbd class="esc-kbd">ESC</kbd>
       </div>
       <div class="cmd-k-results" id="cmd-k-results">
@@ -553,10 +554,10 @@
   </div>
 
   <!-- QR CODE MODAL -->
-  <div id="qr-modal" class="modal-backdrop hidden">
+  <div id="qr-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="qr-title">
     <div class="qr-dialog glass-card text-center">
-      <button id="qr-close-btn" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
-      <h3><i class="fa-solid fa-qrcode text-indigo"></i> Share This Profile</h3>
+      <button id="qr-close-btn" class="modal-close-btn" type="button" aria-label="Close QR code"><i class="fa-solid fa-xmark"></i></button>
+      <h2 id="qr-title"><i class="fa-solid fa-qrcode text-indigo"></i> Share This Profile</h2>
       <p class="qr-sub">Scan this QR code to open and share Frankie's public professional profile on your phone.</p>
       
       <div class="qr-canvas-container">

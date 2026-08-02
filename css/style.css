@@ -111,6 +111,16 @@ h1, h2, h3, h4 {
   letter-spacing: -0.02em;
 }
 
+.sr-only {
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .text-gradient {
   background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #38bdf8 100%);
   -webkit-background-clip: text;
@@ -185,6 +195,13 @@ button, .btn-primary, .btn-secondary, .btn-outline, .btn-ghost {
 .btn-icon-label:hover {
   background: rgba(255, 255, 255, 0.12);
   color: var(--text-primary);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
 }
 
 kbd {
@@ -473,7 +490,7 @@ kbd {
   font-size: 0.85rem;
 }
 
-.profile-info h3 {
+.profile-name {
   font-size: 1.4rem;
   margin-bottom: 0.2rem;
 }
@@ -612,7 +629,7 @@ kbd {
   color: var(--text-muted);
 }
 
-.timeline-content h4 {
+.timeline-content h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
@@ -955,8 +972,11 @@ kbd {
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border: 0;
+  padding: 0;
 }
-.player-node:hover {
+.player-node:hover,
+.player-node:focus-visible {
   transform: translate(-50%, -50%) scale(1.3);
   background: var(--accent-amber);
   color: #fff;
@@ -1302,6 +1322,9 @@ kbd {
 }
 
 .cmd-item {
+  background: transparent;
+  border: 0;
+  color: inherit;
   padding: 0.8rem 1rem;
   border-radius: var(--radius-md);
   display: flex;
@@ -1309,6 +1332,8 @@ kbd {
   justify-content: space-between;
   cursor: pointer;
   transition: background var(--transition-fast);
+  text-align: left;
+  width: 100%;
 }
 .cmd-item:hover, .cmd-item.active {
   background: rgba(99, 102, 241, 0.15);
@@ -1376,6 +1401,24 @@ kbd {
 }
 
 @media (max-width: 640px) {
+  .navbar {
+    padding: 0.7rem 1rem;
+  }
+
+  .brand-title,
+  .nav-actions .btn-primary,
+  .kbd-shortcut {
+    display: none;
+  }
+
+  .brand-name {
+    font-size: 0.9rem;
+  }
+
+  .btn-icon-label {
+    padding: 0.55rem;
+  }
+
   .hero-section {
     padding-top: 1rem;
   }
@@ -1474,5 +1517,24 @@ kbd {
     align-items: flex-start;
     flex-direction: column;
     gap: 0.75rem;
+  }
+
+  .footer {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer-container {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    row-gap: 0.75rem;
+  }
+
+  .modal-backdrop {
+    padding: 1rem;
   }
 }

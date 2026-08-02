@@ -1,7 +1,7 @@
 # Professional Profile Website Redesign
 
 Date: 2 August 2026  
-Status: Approved design for review  
+Status: Final context confirmed; approved design for review
 Publishing status: Do not publish or push to GitHub until Frankie approves the implemented content and look and feel.
 
 ## 1. Purpose
@@ -82,7 +82,7 @@ Professional title:
 
 Positioning statement:
 
-> I turn complex business challenges into clear transformation priorities, practical delivery models and measurable outcomes. My experience spans enterprise technology, GenAI platforms, customer experience, service operations and global programme delivery.
+> I turn complex business challenges into clear transformation priorities, practical delivery models and measurable outcomes. My experience spans enterprise transformation, process and operating-model improvement, customer experience, technology operations and global programme delivery.
 
 Evidence cards:
 
@@ -153,27 +153,27 @@ Past employers Mars and HP China may be named in the detailed timeline. The curr
 
 Repurpose the existing interactive technology tabs. Combine professional capabilities and working approach in one section.
 
-#### Tab 1: Strategy & Transformation
+#### Tab 1: Strategy & Outcomes
 
-Cover business-led transformation strategy, target operating models, customer journeys, roadmaps and benefit definition.
+Cover business problems, customer needs, transformation priorities, roadmaps and benefit definition.
 
-#### Tab 2: Delivery & Governance
+#### Tab 2: People, Process & Delivery
 
-Cover global programme delivery, stakeholder alignment, decision rights, RAID management, delivery controls and accountable ownership.
+Cover talent development, stakeholder alignment, process engineering, target operating models, governance, accountable ownership and global programme execution.
 
-#### Tab 3: Technology & Operations
+#### Tab 3: Tools & Technology
 
-Cover GenAI operating models, digital customer experience, enterprise platforms, SAP, ITSM and service operations.
+Cover enterprise platforms, SAP, ITSM, automation and AI as tools selected according to the problem being solved.
 
 Each tab follows the same working sequence:
 
 > Frame the problem -> align the people -> mobilise delivery -> measure and adapt
 
-The website's AI-assisted creation may remain as a small proof point. It must not dominate the professional story or imply unsupported technical capability.
+Mindset, strategy and people remain the foundation of the professional story. Process engineering, tools and technology support the transformation; they do not lead the narrative.
 
 ### 5.5 Beyond Work
 
-Use four main hobby stories. Lead each card with Frankie's real experience, followed by one concise “aha” moment. Interactive features support the story rather than replace it.
+Use five main hobby stories. Lead each card with Frankie's real experience, followed by one concise “aha” moment. Interactive features support the story rather than replace it.
 
 #### Honor of Kings — The value of enabling others
 
@@ -225,6 +225,21 @@ Clearly label the September 2026 journey as planned. Remove invented Alpine and 
 
 Fold travel, local food and ice cream into the motorbike story as discoveries along the road. Do not create separate hobby cards for them.
 
+#### AI exploration — Learning by helping
+
+Learning and applying AI is one of Frankie's personal interests. He enjoys testing new tools, finding practical ways to use them in daily life and using vibe coding to turn ideas into working solutions.
+
+Two live examples demonstrate this hands-on interest:
+
+- helping a friend establish China–Australia e-trade workflows using AI agents;
+- using vibe coding to build a mini-program that is now used to manage farm operations.
+
+Aha moment:
+
+> New technology becomes meaningful when it helps someone solve a real problem.
+
+The website and approved avatar may also be mentioned as personal AI-assisted experiments. Do not present this hobby as professional software-engineering expertise, and do not disclose the names of the friend, business or farm.
+
 ### 5.6 Education
 
 Use a compact, light-touch strip near the end of the page rather than a full card-based section.
@@ -266,7 +281,7 @@ Add:
 
 - LinkedIn and email actions;
 - approved avatar asset after implementation approval;
-- Honor of Kings as a fourth hobby story;
+- Honor of Kings and AI exploration as additional hobby stories;
 - planned/completed status for motorbike journeys.
 
 All content must remain understandable when JavaScript is unavailable. Interactive controls enhance the page but do not contain the only copy of important professional information.
@@ -290,8 +305,10 @@ Use the Google Slides experience deck as the primary evidence source for career 
 
 - current-role wording is public-safe and generic;
 - the current employer is not named;
-- past employers may be named;
+- past employers Mars and HP China may be named;
+- the career metrics listed in this specification are approved for public use;
 - the September 2026 motorbike journey is labelled as planned;
+- the China–Australia e-trade and farm-management examples are live and approved for public use without identifying the friend, business or farm;
 - metrics not supported by the deck or confirmed by Frankie are excluded;
 - unsupported local working claims such as 96% availability, 99% SLA adherence and audit outcomes are not published unless Frankie separately validates them;
 - the website must not present generated hobby routes or corporate analogies as lived experience.
@@ -318,9 +335,10 @@ Before implementation is presented for approval:
 5. Test keyboard navigation, command menu, tabs, QR code and retained hobby interactions.
 6. Check LinkedIn and email links.
 7. Confirm the motorbike timeline distinguishes completed and planned journeys.
-8. Check the page with JavaScript disabled to ensure the professional story remains readable.
-9. Check for console errors, broken anchors, missing assets and overflow.
-10. Review the complete local preview with Frankie before any commit containing website changes or any push to GitHub.
+8. Confirm the AI hobby examples are described as live, practical uses without identifying the friend, business or farm.
+9. Check the page with JavaScript disabled to ensure the professional story remains readable.
+10. Check for console errors, broken anchors, missing assets and overflow.
+11. Review the complete local preview with Frankie before any commit containing website changes or any push to GitHub.
 
 ## 11. Publishing gate
 

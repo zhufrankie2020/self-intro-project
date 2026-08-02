@@ -1,6 +1,6 @@
 /* ==========================================================================
    FRANKIE ZHU — SELF INTRO WEB APP INTERACTIVE LOGIC
-   Soccer Pitch, Snooker Break Builder, ADV Touring Map, Cmd+K, 10-Min Timer
+   Soccer Pitch, Snooker Break Builder, ADV Touring Map, Cmd+K and QR Sharing
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -291,85 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderRoute('tibet-2023');
 
   /* ------------------------------------------------------------------------
-     5. 10-MINUTE PRESENTATION TIMER & OVERLAY
-     ------------------------------------------------------------------------ */
-  const presentationOverlay = document.getElementById('presentation-overlay');
-  const startPresentationBtn = document.getElementById('start-presentation-btn');
-  const timerDisplay = document.getElementById('timer-display');
-  const timerToggleBtn = document.getElementById('timer-toggle-btn');
-  const timerResetBtn = document.getElementById('timer-reset-btn');
-  const timerCloseBtn = document.getElementById('timer-close-btn');
-
-  let timerSeconds = 600; // 10 minutes
-  let timerInterval = null;
-  let isTimerRunning = false;
-
-  function formatTime(secs) {
-    const m = Math.floor(secs / 60).toString().padStart(2, '0');
-    const s = (secs % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-  }
-
-  function updateTimerDisplay() {
-    if (timerDisplay) timerDisplay.textContent = formatTime(timerSeconds);
-  }
-
-  function startTimer() {
-    if (timerInterval) clearInterval(timerInterval);
-    isTimerRunning = true;
-    if (timerToggleBtn) timerToggleBtn.innerHTML = `<i class="fa-solid fa-pause"></i> Pause`;
-
-    timerInterval = setInterval(() => {
-      if (timerSeconds > 0) {
-        timerSeconds--;
-        updateTimerDisplay();
-      } else {
-        clearInterval(timerInterval);
-        isTimerRunning = false;
-        if (timerToggleBtn) timerToggleBtn.innerHTML = `<i class="fa-solid fa-check"></i> Done`;
-      }
-    }, 1000);
-  }
-
-  function pauseTimer() {
-    clearInterval(timerInterval);
-    isTimerRunning = false;
-    if (timerToggleBtn) timerToggleBtn.innerHTML = `<i class="fa-solid fa-play"></i> Resume`;
-  }
-
-  if (startPresentationBtn) {
-    startPresentationBtn.addEventListener('click', () => {
-      presentationOverlay?.classList.remove('hidden');
-      timerSeconds = 600;
-      updateTimerDisplay();
-      startTimer();
-    });
-  }
-
-  if (timerToggleBtn) {
-    timerToggleBtn.addEventListener('click', () => {
-      if (isTimerRunning) pauseTimer();
-      else startTimer();
-    });
-  }
-
-  if (timerResetBtn) {
-    timerResetBtn.addEventListener('click', () => {
-      pauseTimer();
-      timerSeconds = 600;
-      updateTimerDisplay();
-    });
-  }
-
-  if (timerCloseBtn) {
-    timerCloseBtn.addEventListener('click', () => {
-      pauseTimer();
-      presentationOverlay?.classList.add('hidden');
-    });
-  }
-
-  /* ------------------------------------------------------------------------
-     6. COMMAND PALETTE (CMD+K)
+     5. COMMAND PALETTE (CMD+K)
      ------------------------------------------------------------------------ */
   const cmdKBtn = document.getElementById('cmd-k-btn');
   const footerCmdBtn = document.getElementById('footer-cmd-btn');
@@ -378,16 +300,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const cmdKResults = document.getElementById('cmd-k-results');
 
   const commands = [
-    { title: 'Hero & Summary', subtitle: 'Frankie (Yifan) Zhu - 20+ Yrs IT & GenAI Leader', target: '#hero', icon: 'fa-user' },
+    { title: 'Profile Summary', subtitle: 'Frankie (Yifan) Zhu - global transformation and technology leader', target: '#hero', icon: 'fa-user' },
     { title: 'How I Think and Lead', subtitle: 'Clear direction, easier execution and stronger teams', target: '#principles', icon: 'fa-compass' },
-    { title: '20+ Yrs Career Experience', subtitle: 'Global consumer goods & HP China track record', target: '#experience', icon: 'fa-briefcase' },
+    { title: 'Career Experience', subtitle: 'Transformation, customer experience and technology operations', target: '#experience', icon: 'fa-briefcase' },
     { title: 'From Strategy to Results', subtitle: 'Strategy, people, delivery, tools and technology', target: '#capabilities', icon: 'fa-chart-line' },
     { title: 'Manchester United ⚽ Formation', subtitle: 'Interactive formation switcher and team tactics', target: '#hobbies', icon: 'fa-futbol' },
     { title: 'Snooker 🎱 Break Builder', subtitle: 'Interactive red-and-black break builder', target: '#hobbies', icon: 'fa-circle-dot' },
     { title: 'ADV Motorbike 🏍️ Journeys', subtitle: 'Completed journeys and the September 2026 plan', target: '#hobbies', icon: 'fa-motorcycle' },
-    { title: '10-Minute Presentation Agenda', subtitle: 'Timeline breakdown for today\'s meeting', target: '#agenda', icon: 'fa-stopwatch' },
-    { title: 'Start 10-Min Intro Timer Mode', subtitle: 'Activate presentation overlay & timer', action: 'TIMER_MODE', icon: 'fa-play' },
-    { title: 'Share Mobile QR Code', subtitle: 'Display QR code for phone scanning', action: 'QR_MODE', icon: 'fa-qrcode' }
+    { title: 'Education', subtitle: 'Academic foundation in e-business management and economics', target: '#education', icon: 'fa-graduation-cap' },
+    { title: 'Connect', subtitle: 'LinkedIn and email', target: '#connect', icon: 'fa-paper-plane' },
+    { title: 'Share Profile QR Code', subtitle: 'Display a QR code for sharing this public profile', action: 'QR_MODE', icon: 'fa-qrcode' }
   ];
 
   function openCmdK() {
@@ -433,9 +355,6 @@ document.addEventListener('DOMContentLoaded', () => {
         closeCmdK();
         if (cmd.target) {
           document.querySelector(cmd.target)?.scrollIntoView({ behavior: 'smooth' });
-        } else if (cmd.action === 'TIMER_MODE') {
-          presentationOverlay?.classList.remove('hidden');
-          startTimer();
         } else if (cmd.action === 'QR_MODE') {
           document.getElementById('qr-modal')?.classList.remove('hidden');
         }
@@ -468,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ------------------------------------------------------------------------
-     7. QR CODE MODAL
+     6. QR CODE MODAL
      ------------------------------------------------------------------------ */
   const qrModal = document.getElementById('qr-modal');
   const qrCloseBtn = document.getElementById('qr-close-btn');

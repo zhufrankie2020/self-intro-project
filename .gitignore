@@ -3,6 +3,7 @@
 Thumbs.db
 .vscode/
 .idea/
+.worktrees/
 
 # Node modules / temp logs
 node_modules/

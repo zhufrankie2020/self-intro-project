@@ -35,45 +35,62 @@ document.addEventListener('DOMContentLoaded', () => {
   const playerTooltip = document.getElementById('player-tooltip');
   const formationBtns = document.querySelectorAll('.formation-btn');
 
+  const roleInsights = {
+    GK: 'Organises the defence, reads danger early and protects the goal.',
+    RB: 'Defends the right side and overlaps to support attacks.',
+    CB: 'Marks central attackers, wins challenges and starts play from the back.',
+    LB: 'Defends the left side and provides width when the team moves forward.',
+    CDM: 'Screens the defence, regains possession and keeps the ball moving.',
+    CM: 'Connects defence and attack, offering passing options across midfield.',
+    RAM: 'Creates chances from the right half-space and supports the striker.',
+    CAM: 'Finds space between the lines and supplies the final pass.',
+    LAM: 'Creates chances from the left half-space and links with wide players.',
+    RWB: 'Covers the full right flank, balancing recovery runs with forward width.',
+    LWB: 'Covers the full left flank, balancing recovery runs with forward width.',
+    RW: 'Stretches the right side, carries the ball forward and creates chances.',
+    LW: 'Stretches the left side, carries the ball forward and creates chances.',
+    ST: 'Leads the attack, occupies defenders and finishes chances.'
+  };
+
   const formations = {
     '433': [
-      { id: 1, name: 'GK (Goalie)', pos: { x: 50, y: 90 }, role: 'Risk Control & 99% SLA Stability' },
-      { id: 2, name: 'RB (Right Back)', pos: { x: 80, y: 72 }, role: 'Omni-channel Digital Support' },
-      { id: 3, name: 'CB (Center Back)', pos: { x: 62, y: 78 }, role: 'GenAI Dev-Sec-Ops Governance' },
-      { id: 4, name: 'CB (Center Back)', pos: { x: 38, y: 78 }, role: 'Responsible AI & Security Audit' },
-      { id: 5, name: 'LB (Left Back)', pos: { x: 20, y: 72 }, role: 'HappySignal XLA & CSAT 4.9/5' },
-      { id: 6, name: 'CDM (Anchor)', pos: { x: 50, y: 55 }, role: 'ITIL Master & PMP Architecture' },
-      { id: 7, name: 'CM (Playmaker)', pos: { x: 70, y: 40 }, role: 'Strategic Delivery Head (Frankie)' },
-      { id: 8, name: 'CM (Engine)', pos: { x: 30, y: 40 }, role: '0% ➔ 80% Digital Adoption' },
-      { id: 9, name: 'RW (Wing Forward)', pos: { x: 82, y: 20 }, role: 'Productivity & AI Chatbot' },
-      { id: 10, name: 'ST (Striker)', pos: { x: 50, y: 15 }, role: '2x Global GLM Award Winner' },
-      { id: 11, name: 'LW (Wing Forward)', pos: { x: 18, y: 20 }, role: 'Agentic AI Workflows' }
+      { id: 1, name: 'GK (Goalkeeper)', pos: { x: 50, y: 90 } },
+      { id: 2, name: 'RB (Right Back)', pos: { x: 80, y: 72 } },
+      { id: 3, name: 'CB (Centre Back)', pos: { x: 62, y: 78 } },
+      { id: 4, name: 'CB (Centre Back)', pos: { x: 38, y: 78 } },
+      { id: 5, name: 'LB (Left Back)', pos: { x: 20, y: 72 } },
+      { id: 6, name: 'CDM (Defensive Midfielder)', pos: { x: 50, y: 55 } },
+      { id: 7, name: 'CM (Central Midfielder)', pos: { x: 70, y: 40 } },
+      { id: 8, name: 'CM (Central Midfielder)', pos: { x: 30, y: 40 } },
+      { id: 9, name: 'RW (Right Winger)', pos: { x: 82, y: 20 } },
+      { id: 10, name: 'ST (Striker)', pos: { x: 50, y: 15 } },
+      { id: 11, name: 'LW (Left Winger)', pos: { x: 18, y: 20 } }
     ],
     '4231': [
-      { id: 1, name: 'GK', pos: { x: 50, y: 90 }, role: 'Enterprise Risk Shield' },
-      { id: 2, name: 'RB', pos: { x: 82, y: 75 }, role: 'Transformation & Technology Track Record' },
-      { id: 3, name: 'CB', pos: { x: 63, y: 80 }, role: 'GenAI Platform 96% Availability' },
-      { id: 4, name: 'CB', pos: { x: 37, y: 80 }, role: 'SAP & ServiceNow Ecosystem' },
-      { id: 5, name: 'LB', pos: { x: 18, y: 75 }, role: 'Customer Experience Transformation' },
-      { id: 6, name: 'CDM', pos: { x: 62, y: 60 }, role: 'Regional Team Lead (50 Squad)' },
-      { id: 7, name: 'CDM', pos: { x: 38, y: 60 }, role: 'Global IT Operations Governance' },
-      { id: 8, name: 'RAM', pos: { x: 78, y: 35 }, role: 'Automation Utilization (+200% T1)' },
-      { id: 9, name: 'CAM', pos: { x: 50, y: 32 }, role: 'Frankie (Yifan) Zhu — Delivery Head' },
-      { id: 10, name: 'LAM', pos: { x: 22, y: 35 }, role: 'Gallup Top 5 Team Engagement' },
-      { id: 11, name: 'ST', pos: { x: 50, y: 14 }, role: '20+ Yrs Business Value Delivery' }
+      { id: 1, name: 'GK', pos: { x: 50, y: 90 } },
+      { id: 2, name: 'RB', pos: { x: 82, y: 75 } },
+      { id: 3, name: 'CB', pos: { x: 63, y: 80 } },
+      { id: 4, name: 'CB', pos: { x: 37, y: 80 } },
+      { id: 5, name: 'LB', pos: { x: 18, y: 75 } },
+      { id: 6, name: 'CDM', pos: { x: 62, y: 60 } },
+      { id: 7, name: 'CDM', pos: { x: 38, y: 60 } },
+      { id: 8, name: 'RAM', pos: { x: 78, y: 35 } },
+      { id: 9, name: 'CAM', pos: { x: 50, y: 32 } },
+      { id: 10, name: 'LAM', pos: { x: 22, y: 35 } },
+      { id: 11, name: 'ST', pos: { x: 50, y: 14 } }
     ],
     '352': [
-      { id: 1, name: 'GK', pos: { x: 50, y: 90 }, role: 'Operational Excellence' },
-      { id: 2, name: 'CB', pos: { x: 75, y: 78 }, role: 'GenAI Dev-Sec-Ops' },
-      { id: 3, name: 'CB', pos: { x: 50, y: 80 }, role: 'Enterprise Core Anchor' },
-      { id: 4, name: 'CB', pos: { x: 25, y: 78 }, role: 'Compliance & Audit Assurance' },
-      { id: 5, name: 'RWB', pos: { x: 88, y: 48 }, role: 'Omni-channel Support' },
-      { id: 6, name: 'CM', pos: { x: 65, y: 52 }, role: 'ITIL Master Framework' },
-      { id: 7, name: 'CM', pos: { x: 50, y: 45 }, role: 'Frankie Zhu (Strategic Leader)' },
-      { id: 8, name: 'CM', pos: { x: 35, y: 52 }, role: 'PMP Programme Director' },
-      { id: 9, name: 'LWB', pos: { x: 12, y: 48 }, role: 'HappySignal XLA Metrics' },
-      { id: 10, name: 'ST', pos: { x: 62, y: 18 }, role: '2x GLM Leadership Award' },
-      { id: 11, name: 'ST', pos: { x: 38, y: 18 }, role: '4.9/5 User CSAT Score' }
+      { id: 1, name: 'GK', pos: { x: 50, y: 90 } },
+      { id: 2, name: 'CB', pos: { x: 75, y: 78 } },
+      { id: 3, name: 'CB', pos: { x: 50, y: 80 } },
+      { id: 4, name: 'CB', pos: { x: 25, y: 78 } },
+      { id: 5, name: 'RWB', pos: { x: 88, y: 48 } },
+      { id: 6, name: 'CM', pos: { x: 65, y: 52 } },
+      { id: 7, name: 'CM', pos: { x: 50, y: 45 } },
+      { id: 8, name: 'CM', pos: { x: 35, y: 52 } },
+      { id: 9, name: 'LWB', pos: { x: 12, y: 48 } },
+      { id: 10, name: 'ST', pos: { x: 62, y: 18 } },
+      { id: 11, name: 'ST', pos: { x: 38, y: 18 } }
     ]
   };
 
@@ -83,16 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentFormation = formations[formationKey] || formations['433'];
 
     currentFormation.forEach(player => {
+      const positionCode = player.name.split(' ')[0];
+      const positionInsight = roleInsights[positionCode];
       const node = document.createElement('div');
       node.className = 'player-node';
       node.style.left = `${player.pos.x}%`;
       node.style.top = `${player.pos.y}%`;
       node.textContent = player.id;
-      node.setAttribute('title', `${player.name} - ${player.role}`);
+      node.setAttribute('title', `${player.name} — ${positionInsight}`);
 
       node.addEventListener('click', () => {
         if (playerTooltip) {
-          playerTooltip.innerHTML = `<i class="fa-solid fa-futbol text-emerald"></i> <strong>#${player.id} ${player.name}:</strong> ${player.role}`;
+          playerTooltip.innerHTML = `<i class="fa-solid fa-futbol text-emerald"></i> <strong>#${player.id} ${player.name}:</strong> ${positionInsight}`;
           playerTooltip.style.borderColor = 'var(--accent-emerald)';
         }
       });
@@ -162,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateSnookerUI();
 
       if (snookerInsightEl) {
-        snookerInsightEl.innerHTML = `<i class="fa-solid fa-circle-check text-emerald"></i> <strong>Potted Red (+1)!</strong> Excellent cue ball position for the Black. Now pot the Black ball!`;
+        snookerInsightEl.innerHTML = `<i class="fa-solid fa-circle-check text-emerald"></i> <strong>Red potted (+1).</strong> The black is now the next ball on the table.`;
       }
     });
   }
@@ -177,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateSnookerUI();
 
       if (snookerInsightEl) {
-        snookerInsightEl.innerHTML = `<i class="fa-solid fa-star text-amber"></i> <strong>Potted Black (+7)!</strong> Break building in progress (${snookerBreak} pts)! Leadership lesson: High performance comes from repeated precision.`;
+        snookerInsightEl.innerHTML = `<i class="fa-solid fa-star text-amber"></i> <strong>Black potted (+7).</strong> Break: ${snookerBreak} points. The next ball is red.`;
       }
     });
   }
@@ -191,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateSnookerUI();
 
       if (snookerInsightEl) {
-        snookerInsightEl.innerHTML = `<i class="fa-solid fa-lightbulb text-amber"></i> <strong>Leadership Insight:</strong> Potting a red is execution; positioning the cue ball for the black is strategic foresight.`;
+        snookerInsightEl.innerHTML = `<i class="fa-solid fa-lightbulb text-amber"></i> <strong>Table plan:</strong> Pot the red, then leave the cue ball in position for the black.`;
       }
     });
   }
@@ -202,82 +221,60 @@ document.addEventListener('DOMContentLoaded', () => {
   const routeTabs = document.querySelectorAll('.route-tab');
   const routeDetailsEl = document.getElementById('adv-route-details');
   const routeMapTitleEl = document.getElementById('route-map-title');
-  const elevationGraphicEl = document.getElementById('elevation-graphic');
+  const routeStatusEl = document.getElementById('route-status');
+  const routeStoryPointsEl = document.getElementById('route-story-points');
 
   const routeData = {
-    'route-318': {
-      title: 'Sichuan-Tibet Highway (Route 318)',
-      dist: '2,140 km',
-      elevation: '5,130 m',
-      terrain: 'High Altitude Mountain Passes',
-      bike: '1200cc Adventure Touring',
-      desc: 'One of the most challenging and iconic ADV routes in the world. Crossing 14 mountain passes above 4,000 meters elevation, demanding extreme weather resilience, navigation, and physical endurance.',
-      bars: [
-        { height: 40, pass: 'Chengdu (500m)' },
-        { height: 65, pass: 'Zheduo Pass (4,298m)' },
-        { height: 80, pass: 'Jianziwan Pass (4,659m)' },
-        { height: 95, pass: 'Dongda Pass (5,130m)' },
-        { height: 85, pass: 'Sejila Pass (4,728m)' },
-        { height: 50, pass: 'Lhasa (3,650m)' }
-      ]
+    'tibet-2023': {
+      title: 'Tibet and Lhasa',
+      dateLabel: '2023 — Completed',
+      statusLabel: 'Completed',
+      statusClass: 'completed-status',
+      desc: 'My first major post-COVID journey: solo snow riding, repeated falls, lifting the bike and continuing until I reached Lhasa.',
+      points: ['Solo snow riding', 'Fell, lifted the bike and reset', 'Continued to Lhasa']
     },
-    'route-alps': {
-      title: 'Alpine Pass Challenge (Stelvio & Grossglockner)',
-      dist: '1,450 km',
-      elevation: '2,757 m',
-      terrain: '48 Hairpin Switchbacks & Alpine Glaciers',
-      bike: '1200cc Dual-Sport ADV',
-      desc: 'Navigating European mountain passes with tight hairpins, rapid weather shifts, and technical braking. Parallels complex enterprise delivery: precision control around tight curves.',
-      bars: [
-        { height: 35, pass: 'Innsbruck' },
-        { height: 85, pass: 'Grossglockner (2,504m)' },
-        { height: 100, pass: 'Stelvio Pass (2,757m)' },
-        { height: 75, pass: 'Furka Pass (2,429m)' },
-        { height: 45, pass: 'Zurich' }
-      ]
+    'sichuan-2025': {
+      title: 'Western Sichuan',
+      dateLabel: '2025 — Completed',
+      statusLabel: 'Completed',
+      statusClass: 'completed-status',
+      desc: 'A completed journey through Western Sichuan, where the landscapes and road conditions kept changing rather than offering only plateau scenery.',
+      points: ['Diverse landscapes', 'Changing road conditions', 'Travel and discoveries along the road']
     },
-    'route-coastal': {
-      title: 'Ocean Coastal Highway & Forest Loop',
-      dist: '1,800 km',
-      elevation: '1,200 m',
-      terrain: 'Coastal Twisties & Mountain Trails',
-      bike: 'Adventure Touring Spec',
-      desc: 'Long-distance coastal endurance tour combining high-speed highway cruising with unexpected gravel trail detours. Emphasizes adaptability and long-range planning.',
-      bars: [
-        { height: 20, pass: 'Coastal Start' },
-        { height: 45, pass: 'Mountain Ridge' },
-        { height: 30, pass: 'Cliffside Route' },
-        { height: 60, pass: 'High Forest Trail' },
-        { height: 25, pass: 'Coastline Finish' }
-      ]
+    'hulunbuir-2026': {
+      title: 'Hulunbuir Grasslands and the Greater Khingan Range',
+      dateLabel: 'September 2026 — Planned',
+      statusLabel: 'Planned',
+      statusClass: 'planned-status',
+      desc: 'A planned September 2026 journey to the Hulunbuir Grasslands and the Greater Khingan Range.',
+      points: ['Hulunbuir Grasslands', 'Greater Khingan Range', 'Journey planned for September 2026']
     }
   };
 
   function renderRoute(routeKey) {
-    const data = routeData[routeKey] || routeData['route-318'];
+    const data = routeData[routeKey] || routeData['tibet-2023'];
 
     if (routeDetailsEl) {
       routeDetailsEl.innerHTML = `
         <h4><i class="fa-solid fa-route text-indigo"></i> ${data.title}</h4>
-        <p class="passion-desc">${data.desc}</p>
-        <div class="adv-stats-row">
-          <div class="adv-stat"><span class="val">${data.dist}</span><span class="lbl">Total Distance</span></div>
-          <div class="adv-stat"><span class="val">${data.elevation}</span><span class="lbl">Max Elevation</span></div>
-          <div class="adv-stat"><span class="val">${data.bike}</span><span class="lbl">Bike Setup</span></div>
-        </div>
+        <span class="${data.statusClass}">${data.dateLabel}</span>
+        <p class="journey-description">${data.desc}</p>
       `;
     }
 
-    if (routeMapTitleEl) routeMapTitleEl.textContent = `${data.title} — Profile`;
+    if (routeMapTitleEl) routeMapTitleEl.textContent = `${data.title} — Journey notes`;
+    if (routeStatusEl) {
+      routeStatusEl.className = data.statusClass;
+      routeStatusEl.innerHTML = `<i class="fa-solid ${data.statusLabel === 'Planned' ? 'fa-calendar' : 'fa-circle-check'}"></i> ${data.statusLabel}`;
+    }
 
-    if (elevationGraphicEl) {
-      elevationGraphicEl.innerHTML = '';
-      data.bars.forEach(b => {
-        const bar = document.createElement('div');
-        bar.className = 'elev-bar';
-        bar.style.height = `${b.height}%`;
-        bar.setAttribute('data-pass', b.pass);
-        elevationGraphicEl.appendChild(bar);
+    if (routeStoryPointsEl) {
+      routeStoryPointsEl.innerHTML = '';
+      data.points.forEach(point => {
+        const marker = document.createElement('div');
+        marker.className = 'journey-point';
+        marker.innerHTML = `<i class="fa-solid fa-location-dot"></i><span>${point}</span>`;
+        routeStoryPointsEl.appendChild(marker);
       });
     }
   }
@@ -291,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  renderRoute('route-318');
+  renderRoute('tibet-2023');
 
   /* ------------------------------------------------------------------------
      5. 10-MINUTE PRESENTATION TIMER & OVERLAY
@@ -385,9 +382,9 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: 'How I Think and Lead', subtitle: 'Clear direction, easier execution and stronger teams', target: '#principles', icon: 'fa-compass' },
     { title: '20+ Yrs Career Experience', subtitle: 'Global consumer goods & HP China track record', target: '#experience', icon: 'fa-briefcase' },
     { title: 'From Strategy to Results', subtitle: 'Strategy, people, delivery, tools and technology', target: '#capabilities', icon: 'fa-chart-line' },
-    { title: 'Soccer ⚽ Tactical Pitch', subtitle: 'Interactive formation switcher & team tactics', target: '#passions', icon: 'fa-futbol' },
-    { title: 'Snooker 🎱 Break Builder', subtitle: 'Interactive 147 break potting simulator', target: '#passions', icon: 'fa-circle-dot' },
-    { title: 'ADV Motorbike 🏍️ Routes', subtitle: 'Route 318 & mountain pass tour profiles', target: '#passions', icon: 'fa-motorcycle' },
+    { title: 'Manchester United ⚽ Formation', subtitle: 'Interactive formation switcher and team tactics', target: '#hobbies', icon: 'fa-futbol' },
+    { title: 'Snooker 🎱 Break Builder', subtitle: 'Interactive red-and-black break builder', target: '#hobbies', icon: 'fa-circle-dot' },
+    { title: 'ADV Motorbike 🏍️ Journeys', subtitle: 'Completed journeys and the September 2026 plan', target: '#hobbies', icon: 'fa-motorcycle' },
     { title: '10-Minute Presentation Agenda', subtitle: 'Timeline breakdown for today\'s meeting', target: '#agenda', icon: 'fa-stopwatch' },
     { title: 'Start 10-Min Intro Timer Mode', subtitle: 'Activate presentation overlay & timer', action: 'TIMER_MODE', icon: 'fa-play' },
     { title: 'Share Mobile QR Code', subtitle: 'Display QR code for phone scanning', action: 'QR_MODE', icon: 'fa-qrcode' }

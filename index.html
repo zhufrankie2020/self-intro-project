@@ -44,7 +44,7 @@
         <a href="#principles" class="nav-item"><i class="fa-solid fa-compass"></i> How I Lead</a>
         <a href="#experience" class="nav-item"><i class="fa-solid fa-briefcase"></i> Experience</a>
         <a href="#capabilities" class="nav-item"><i class="fa-solid fa-chart-line"></i> Capabilities</a>
-        <a href="#passions" class="nav-item"><i class="fa-solid fa-heart"></i> Passions</a>
+        <a href="#hobbies" class="nav-item"><i class="fa-solid fa-heart"></i> Beyond Work</a>
         <a href="#agenda" class="nav-item"><i class="fa-solid fa-stopwatch"></i> 10-Min Agenda</a>
       </nav>
 
@@ -108,7 +108,7 @@
             <a href="#capabilities" class="btn-secondary">
               <i class="fa-solid fa-chart-line"></i> From Strategy to Results
             </a>
-            <a href="#passions" class="btn-outline">
+            <a href="#hobbies" class="btn-outline">
               <i class="fa-solid fa-gamepad"></i> Try Interactive Hobbies
             </a>
             <button id="hero-qr-btn" class="btn-ghost">
@@ -317,164 +317,171 @@
       </div>
     </section>
 
-    <!-- PERSONAL PASSIONS SECTION (INTERACTIVE 3-CARD SYSTEM) -->
-    <section id="passions" class="section">
+    <!-- BEYOND WORK -->
+    <section id="hobbies" class="section">
       <div class="section-header">
         <div class="section-tag"><i class="fa-solid fa-heart"></i> The Human Side</div>
-        <h2 class="section-title">Personal Passions & Leadership Parallels</h2>
-        <p class="section-desc">Interactive widgets showcasing my life outside of tech—and how they inform my work.</p>
+        <h2 class="section-title">Beyond Work</h2>
+        <p class="section-desc">Five interests, the real stories behind them, and what each has taught me.</p>
       </div>
 
-      <div class="passions-grid">
+      <div class="hobbies-grid">
+        <article class="hobby-card glass-card">
+          <div class="hobby-header">
+            <div class="passion-icon icon-emerald"><i class="fa-solid fa-gamepad"></i></div>
+            <div>
+              <h3>Honor of Kings — Quiet Support</h3>
+              <span class="hobby-subtitle">Making the whole team stronger</span>
+            </div>
+          </div>
+          <p class="hobby-story">I am an all-round player who can fill different positions, but I naturally prefer support roles. I currently play Jin Chan for his control and teamwide buffs.</p>
+          <p class="hobby-evidence"><i class="fa-solid fa-shield-halved"></i> Control the moment, protect the team and create space for others.</p>
+          <p class="aha-moment"><strong>Aha:</strong> Impact can be quiet. Good timing, control and support create the conditions for the whole team to perform better.</p>
+        </article>
 
-        <!-- CARD 1: SOCCER TACTICAL PITCH -->
-        <div class="passion-card glass-card">
-          <div class="passion-header">
+        <article class="hobby-card glass-card">
+          <div class="hobby-header">
+            <div class="passion-icon icon-indigo"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div>
+              <h3>AI Exploration — Learning by Helping</h3>
+              <span class="hobby-subtitle">Practical learning in daily life</span>
+            </div>
+          </div>
+          <p class="hobby-story">I enjoy learning and using AI in daily life: testing tools, understanding what they can do and applying them to real needs.</p>
+          <div class="hobby-evidence">
+            <p><i class="fa-solid fa-earth-asia"></i> A China–Australia e-trade workflow built with AI agents and now in use.</p>
+            <p><i class="fa-solid fa-seedling"></i> A vibe-coded mini-program, built through vibe coding, now used to manage farm operations.</p>
+          </div>
+          <p class="aha-moment"><strong>Aha:</strong> New technology becomes meaningful when it helps someone solve a real problem.</p>
+        </article>
+
+        <article class="hobby-card glass-card">
+          <div class="hobby-header">
             <div class="passion-icon icon-emerald"><i class="fa-solid fa-futbol"></i></div>
-            <div class="passion-title-wrap">
-              <h3>Soccer ⚽ — Tactical Strategy</h3>
-              <span class="passion-subtitle">Teamwork, Spatial Awareness & Strategic Formations</span>
+            <div>
+              <h3>Manchester United — Sustaining Success Together</h3>
+              <span class="hobby-subtitle">The Class of '92</span>
             </div>
           </div>
-          
-          <div class="passion-body">
-            <p class="passion-desc">Just like a football match, software delivery requires clear roles, fluid communication, and tactical adaptation under pressure.</p>
-            
-            <!-- Soccer Pitch Widget -->
-            <div class="soccer-widget">
-              <div class="formation-controls">
-                <span>Select Formation:</span>
-                <button class="formation-btn active" data-formation="433">4-3-3 Attack</button>
-                <button class="formation-btn" data-formation="4231">4-2-3-1 Control</button>
-                <button class="formation-btn" data-formation="352">3-5-2 Dynamic</button>
-              </div>
+          <p class="hobby-story">I am a passionate Manchester United supporter. My favourite generation is the Class of '92: David Beckham, Nicky Butt, Ryan Giggs, Gary Neville, Phil Neville and Paul Scholes. Watching six brilliant players grow together and contribute to three consecutive Premier League titles left a lasting impression.</p>
+          <p class="hobby-evidence"><i class="fa-solid fa-person-running"></i> I used to play football twice a week and hope to return when work settles.</p>
+          <p class="aha-moment"><strong>Aha:</strong> Lasting success grows from shared standards, trust and people who keep improving together.</p>
 
-              <div class="pitch-container" id="pitch-container">
-                <div class="pitch-line center-line"></div>
-                <div class="pitch-line center-circle"></div>
-                <div class="pitch-line penalty-box top"></div>
-                <div class="pitch-line penalty-box bottom"></div>
-                
-                <!-- Player Nodes inserted dynamically via JS -->
-                <div id="pitch-players-layer"></div>
-              </div>
-
-              <div id="player-tooltip" class="player-info-box">
-                <i class="fa-solid fa-circle-info"></i> Click any player node on the pitch to see team leadership insights!
-              </div>
+          <div class="soccer-widget football-widget" aria-label="Interactive football formation">
+            <div class="formation-controls">
+              <span>Select formation:</span>
+              <button class="formation-btn active" data-formation="433">4-3-3 Attack</button>
+              <button class="formation-btn" data-formation="4231">4-2-3-1 Control</button>
+              <button class="formation-btn" data-formation="352">3-5-2 Dynamic</button>
+            </div>
+            <div class="pitch-container" id="pitch-container">
+              <div class="pitch-line center-line"></div>
+              <div class="pitch-line center-circle"></div>
+              <div class="pitch-line penalty-box top"></div>
+              <div class="pitch-line penalty-box bottom"></div>
+              <div id="pitch-players-layer"></div>
+            </div>
+            <div id="player-tooltip" class="player-info-box">
+              <i class="fa-solid fa-circle-info"></i> Select a player to see what that position does on the pitch.
             </div>
           </div>
-        </div>
+        </article>
 
-        <!-- CARD 2: SNOOKER BREAK BUILDER -->
-        <div class="passion-card glass-card">
-          <div class="passion-header">
+        <article class="hobby-card glass-card">
+          <div class="hobby-header">
             <div class="passion-icon icon-amber"><i class="fa-solid fa-circle-dot"></i></div>
-            <div class="passion-title-wrap">
-              <h3>Snooker 🎱 — Precision & Focus</h3>
-              <span class="passion-subtitle">Single-Ball Focus & Thinking 3 Shots Ahead</span>
+            <div>
+              <h3>Snooker — Precision at the Right Tempo</h3>
+              <span class="hobby-subtitle">Attack, control and disciplined defence</span>
             </div>
           </div>
+          <p class="hobby-story">I enjoy playing snooker and following the professional game. I admire Ronnie O'Sullivan for his fast tempo, accuracy and effortless style, and Ding Junhui for his stability, precision and disciplined defence. I also enjoy seeing snooker attract more attention in China.</p>
+          <p class="aha-moment"><strong>Aha:</strong> Mastery comes from choosing the right tempo: attacking decisively when the opportunity is there, and controlling the table patiently when it is not.</p>
 
-          <div class="passion-body">
-            <p class="passion-desc">Snooker demands intense concentration, cue ball control, and long-range strategy. Test your potting skills in the interactive break builder below!</p>
-
-            <!-- Snooker Widget -->
-            <div class="snooker-widget">
-              <div class="snooker-scoreboard">
-                <div class="score-box">
-                  <span class="score-label">Current Break</span>
-                  <span id="snooker-break-score" class="score-val text-amber">0</span>
-                </div>
-                <div class="score-box">
-                  <span class="score-label">Balls Potted</span>
-                  <span id="snooker-balls-count" class="score-val">0</span>
-                </div>
-                <div class="score-box">
-                  <span class="score-label">Target Break</span>
-                  <span class="score-val text-emerald">147</span>
-                </div>
+          <div class="snooker-widget" aria-label="Interactive snooker break builder">
+            <div class="snooker-scoreboard">
+              <div class="score-box">
+                <span class="score-label">Current break</span>
+                <span id="snooker-break-score" class="score-val text-amber">0</span>
               </div>
-
-              <div class="snooker-table" id="snooker-table">
-                <div class="table-cushion"></div>
-                <div class="table-baulk-line"></div>
-                <div class="pocket pocket-tl"></div>
-                <div class="pocket pocket-tr"></div>
-                <div class="pocket pocket-ml"></div>
-                <div class="pocket pocket-mr"></div>
-                <div class="pocket pocket-bl"></div>
-                <div class="pocket pocket-br"></div>
-
-                <div class="snooker-table-center">
-                  <div id="snooker-cue-ball" class="ball ball-white"></div>
-                  <div id="snooker-target-ball" class="ball ball-red"></div>
-                </div>
+              <div class="score-box">
+                <span class="score-label">Balls potted</span>
+                <span id="snooker-balls-count" class="score-val">0</span>
               </div>
-
-              <div class="snooker-actions">
-                <button id="pot-red-btn" class="btn-snooker red"><i class="fa-solid fa-bullseye"></i> Pot Red (1pt)</button>
-                <button id="pot-black-btn" class="btn-snooker black" disabled><i class="fa-solid fa-star"></i> Pot Black (7pt)</button>
-                <button id="reset-snooker-btn" class="btn-snooker-reset"><i class="fa-solid fa-rotate-left"></i> Reset Table</button>
-              </div>
-
-              <div id="snooker-feedback" class="snooker-insight">
-                <i class="fa-solid fa-lightbulb text-amber"></i> <strong>Leadership Insight:</strong> Potting a red is execution; positioning the cue ball for the black is strategic foresight.
+              <div class="score-box">
+                <span class="score-label">Maximum break</span>
+                <span class="score-val text-emerald">147</span>
               </div>
             </div>
+            <div class="snooker-table" id="snooker-table">
+              <div class="table-cushion"></div>
+              <div class="table-baulk-line"></div>
+              <div class="pocket pocket-tl"></div>
+              <div class="pocket pocket-tr"></div>
+              <div class="pocket pocket-ml"></div>
+              <div class="pocket pocket-mr"></div>
+              <div class="pocket pocket-bl"></div>
+              <div class="pocket pocket-br"></div>
+              <div class="snooker-table-center">
+                <div id="snooker-cue-ball" class="ball ball-white"></div>
+                <div id="snooker-target-ball" class="ball ball-red"></div>
+              </div>
+            </div>
+            <div class="snooker-actions">
+              <button id="pot-red-btn" class="btn-snooker red"><i class="fa-solid fa-bullseye"></i> Pot red (1pt)</button>
+              <button id="pot-black-btn" class="btn-snooker black" disabled><i class="fa-solid fa-star"></i> Pot black (7pt)</button>
+              <button id="reset-snooker-btn" class="btn-snooker-reset"><i class="fa-solid fa-rotate-left"></i> Reset table</button>
+            </div>
+            <div id="snooker-feedback" class="snooker-insight">
+              <i class="fa-solid fa-lightbulb text-amber"></i> <strong>Table plan:</strong> Pot the red, then leave the cue ball in position for the black.
+            </div>
           </div>
-        </div>
+        </article>
 
-        <!-- CARD 3: ADV MOTORBIKE TOURING -->
-        <div class="passion-card glass-card full-width">
-          <div class="passion-header">
+        <article class="hobby-card glass-card full-width">
+          <div class="hobby-header">
             <div class="passion-icon icon-indigo"><i class="fa-solid fa-motorcycle"></i></div>
-            <div class="passion-title-wrap">
-              <h3>ADV Motorbike Touring 🏍️ — Adventure & Resilience</h3>
-              <span class="passion-subtitle">Long-Distance Endurance, Uncharted Routes & Risk Management</span>
+            <div>
+              <h3>ADV Motorbike Journeys — Get Up and Keep Moving</h3>
+              <span class="hobby-subtitle">Roads, landscapes and discoveries along the way</span>
             </div>
           </div>
+          <p class="hobby-story">My first major motorbike journey after COVID was to Tibet and Lhasa in 2023. I rode alone through snow, fell repeatedly, lifted the bike, restarted and continued until I reached Lhasa. Since then, the travel, changing scenery, hard moments, local food and even finding ice cream along the road have all become part of why I ride.</p>
+          <p class="aha-moment"><strong>Aha:</strong> Resilience became something physical and immediate: lift the bike, reset and keep moving.</p>
+          <ol class="journey-summary" aria-label="Motorbike journey timeline">
+            <li><span class="completed-status">2023 — Completed</span><strong>Tibet and Lhasa</strong><p>Solo snow riding, repeated falls, lifting the bike and continuing.</p></li>
+            <li><span class="completed-status">2025 — Completed</span><strong>Western Sichuan</strong><p>Diverse landscapes and changing road conditions, not just plateau scenery.</p></li>
+            <li><span class="planned-status">September 2026 — Planned</span><strong>Hulunbuir Grasslands and the Greater Khingan Range</strong><p>The trip is planned for September 2026.</p></li>
+          </ol>
 
-          <div class="passion-body">
-            <p class="passion-desc">Riding an Adventure (ADV) touring motorcycle through high-altitude mountain passes teaches adaptability, resilience in changing weather, and continuous navigation.</p>
-
-            <!-- ADV Motorbike Widget -->
-            <div class="adv-widget">
-              <div class="adv-route-selector">
-                <button class="route-tab active" data-route="route-318">
-                  <i class="fa-solid fa-mountain"></i> Sichuan-Tibet Hwy 318
-                </button>
-                <button class="route-tab" data-route="route-alps">
-                  <i class="fa-solid fa-cloud-sun"></i> Alpine Pass Challenge
-                </button>
-                <button class="route-tab" data-route="route-coastal">
-                  <i class="fa-solid fa-water"></i> Ocean Coastal Highway
-                </button>
+          <div class="adv-widget">
+            <div class="adv-route-selector" aria-label="Select a motorbike journey">
+              <button class="route-tab active" data-route="tibet-2023">
+                <i class="fa-solid fa-mountain"></i> Tibet and Lhasa
+              </button>
+              <button class="route-tab" data-route="sichuan-2025">
+                <i class="fa-solid fa-road"></i> Western Sichuan
+              </button>
+              <button class="route-tab" data-route="hulunbuir-2026">
+                <i class="fa-solid fa-compass"></i> Hulunbuir 2026
+              </button>
+            </div>
+            <div class="adv-display-grid">
+              <div class="adv-card-info" id="adv-route-details">
+                <h4>Tibet and Lhasa</h4>
+                <span class="completed-status">2023 — Completed</span>
+                <p>My first major post-COVID journey: solo snow riding, repeated falls, lifting the bike and continuing to Lhasa.</p>
               </div>
-
-              <div class="adv-display-grid">
-                <div class="adv-card-info" id="adv-route-details">
-                  <!-- Dynamic content loaded via JS -->
+              <div class="journey-profile">
+                <div class="map-header">
+                  <span id="route-map-title">Tibet and Lhasa — Journey notes</span>
+                  <span id="route-status" class="completed-status"><i class="fa-solid fa-circle-check"></i> Completed</span>
                 </div>
-
-                <div class="adv-interactive-map">
-                  <div class="map-placeholder">
-                    <div class="map-overlay">
-                      <div class="map-header">
-                        <span id="route-map-title">Route 318 Elevation Profile</span>
-                        <span class="badge-live"><i class="fa-solid fa-compass"></i> Live Expedition</span>
-                      </div>
-                      <div class="elevation-graphic" id="elevation-graphic">
-                        <!-- SVGs or dynamic bars inserted by JS -->
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <div class="journey-points" id="route-story-points" aria-label="Journey highlights"></div>
               </div>
             </div>
           </div>
-        </div>
-
+        </article>
       </div>
     </section>
 

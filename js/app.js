@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ],
     '4231': [
       { id: 1, name: 'GK', pos: { x: 50, y: 90 }, role: 'Enterprise Risk Shield' },
-      { id: 2, name: 'RB', pos: { x: 82, y: 75 }, role: 'Mars & HP China Track Record' },
+      { id: 2, name: 'RB', pos: { x: 82, y: 75 }, role: 'Transformation & Technology Track Record' },
       { id: 3, name: 'CB', pos: { x: 63, y: 80 }, role: 'GenAI Platform 96% Availability' },
       { id: 4, name: 'CB', pos: { x: 37, y: 80 }, role: 'SAP & ServiceNow Ecosystem' },
       { id: 5, name: 'LB', pos: { x: 18, y: 75 }, role: 'Customer Experience Transformation' },
@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const commands = [
     { title: 'Hero & Summary', subtitle: 'Frankie (Yifan) Zhu - 20+ Yrs IT & GenAI Leader', target: '#hero', icon: 'fa-user' },
     { title: 'How I Think and Lead', subtitle: 'Clear direction, easier execution and stronger teams', target: '#principles', icon: 'fa-compass' },
-    { title: '20+ Yrs Career Experience', subtitle: 'Mars (15+ Yrs) & HP China track record', target: '#experience', icon: 'fa-briefcase' },
+    { title: '20+ Yrs Career Experience', subtitle: 'Global consumer goods & HP China track record', target: '#experience', icon: 'fa-briefcase' },
     { title: 'GenAI & Tech Capability', subtitle: 'GenAI Dev-Sec-Ops, ITIL Master & PMP Certifications', target: '#tech-capability', icon: 'fa-code' },
     { title: 'Soccer ⚽ Tactical Pitch', subtitle: 'Interactive formation switcher & team tactics', target: '#passions', icon: 'fa-futbol' },
     { title: 'Snooker 🎱 Break Builder', subtitle: 'Interactive 147 break potting simulator', target: '#passions', icon: 'fa-circle-dot' },

@@ -6,19 +6,24 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ------------------------------------------------------------------------
-     1. TECH TABS SWITCHER
+     1. CAPABILITY TABS SWITCHER
      ------------------------------------------------------------------------ */
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const tabPanes = document.querySelectorAll('.tab-pane');
+  const capabilitiesSection = document.getElementById('capabilities');
+  const capabilityTabBtns = capabilitiesSection?.querySelectorAll('[data-capability-tab]') ?? [];
+  const capabilityTabPanes = capabilitiesSection?.querySelectorAll('.tab-pane') ?? [];
 
-  tabBtns.forEach(btn => {
+  capabilityTabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      const targetTab = btn.getAttribute('data-tab');
+      const targetTab = btn.getAttribute('data-capability-tab');
 
-      tabBtns.forEach(b => b.classList.remove('active'));
-      tabPanes.forEach(p => p.classList.remove('active'));
+      capabilityTabBtns.forEach(tabBtn => {
+        tabBtn.classList.remove('active');
+        tabBtn.setAttribute('aria-selected', 'false');
+      });
+      capabilityTabPanes.forEach(pane => pane.classList.remove('active'));
 
       btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
       document.getElementById(targetTab)?.classList.add('active');
     });
   });
@@ -379,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: 'Hero & Summary', subtitle: 'Frankie (Yifan) Zhu - 20+ Yrs IT & GenAI Leader', target: '#hero', icon: 'fa-user' },
     { title: 'How I Think and Lead', subtitle: 'Clear direction, easier execution and stronger teams', target: '#principles', icon: 'fa-compass' },
     { title: '20+ Yrs Career Experience', subtitle: 'Global consumer goods & HP China track record', target: '#experience', icon: 'fa-briefcase' },
-    { title: 'GenAI & Tech Capability', subtitle: 'GenAI Dev-Sec-Ops, ITIL Master & PMP Certifications', target: '#tech-capability', icon: 'fa-code' },
+    { title: 'From Strategy to Results', subtitle: 'Strategy, people, delivery, tools and technology', target: '#capabilities', icon: 'fa-chart-line' },
     { title: 'Soccer ⚽ Tactical Pitch', subtitle: 'Interactive formation switcher & team tactics', target: '#passions', icon: 'fa-futbol' },
     { title: 'Snooker 🎱 Break Builder', subtitle: 'Interactive 147 break potting simulator', target: '#passions', icon: 'fa-circle-dot' },
     { title: 'ADV Motorbike 🏍️ Routes', subtitle: 'Route 318 & mountain pass tour profiles', target: '#passions', icon: 'fa-motorcycle' },

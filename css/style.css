@@ -620,20 +620,28 @@ kbd {
 .timeline-content p {
   color: var(--text-secondary);
   font-size: 0.95rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
-.timeline-highlights {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+/* PROFESSIONAL CAPABILITIES */
+.delivery-sequence {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(99, 102, 241, 0.08));
+  color: var(--text-primary);
+  text-align: center;
 }
 
-/* HANDS-ON TECH TABS */
-.tech-tabs-container {
+.sequence-summary {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.capability-tabs {
   padding: 2rem;
 }
 
@@ -646,8 +654,12 @@ kbd {
 }
 
 .tab-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   color: var(--text-secondary);
   padding: 0.6rem 1.2rem;
   border-radius: var(--radius-md);
@@ -669,149 +681,68 @@ kbd {
   border: 1px solid rgba(99, 102, 241, 0.3);
 }
 
+.tab-btn:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+}
+
 .tab-pane {
   display: none;
 }
+
 .tab-pane.active {
   display: block;
 }
 
-.pane-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 2rem;
-  align-items: center;
+.capability-pane-intro {
+  max-width: 760px;
+  margin-bottom: 1.5rem;
 }
 
-.pane-text h3 {
+.capability-pane-intro h3 {
   font-size: 1.4rem;
   margin-bottom: 0.8rem;
 }
-.pane-text p {
+
+.capability-pane-intro p {
   color: var(--text-secondary);
-  margin-bottom: 1.2rem;
+  line-height: 1.7;
 }
 
-.feature-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  color: var(--text-secondary);
-}
-
-/* Code Snippet Box */
-.pane-code {
-  background: #070a12;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-
-.code-header {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 0.6rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-.dot.red { background: #ef4444; }
-.dot.yellow { background: #f59e0b; }
-.dot.green { background: #10b981; }
-
-.code-title {
-  font-family: var(--font-code);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-left: 0.5rem;
-}
-
-.pane-code pre {
-  padding: 1.2rem;
-  font-family: var(--font-code);
-  font-size: 0.85rem;
-  overflow-x: auto;
-}
-
-.code-key { color: #38bdf8; }
-.code-str { color: #a7f3d0; }
-
-.agile-metrics-preview {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.agile-metric {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 0.8rem;
-  border-radius: var(--radius-sm);
-  display: flex;
-  flex-direction: column;
-}
-.agile-metric .num {
-  font-weight: 700;
-  color: var(--accent-emerald);
-}
-.agile-metric .lbl {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-}
-
-.squad-diagram {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.2rem;
-}
-
-.squad-node {
-  padding: 0.8rem 1.4rem;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-.squad-node.leader {
-  background: var(--accent-indigo);
-  color: #fff;
-  box-shadow: 0 0 15px var(--accent-indigo-glow);
-}
-.squad-connections {
-  display: flex;
-  gap: 1rem;
-}
-.squad-node.squad {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-}
-
-.stack-grid {
+.capability-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
 }
-.stack-card {
+
+.capability-grid-tools {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.capability-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-color);
-  padding: 1.5rem;
+  padding: 1.25rem;
   border-radius: var(--radius-md);
-  text-align: center;
+  min-height: 170px;
 }
-.stack-card i {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+
+.capability-card i {
+  color: var(--accent-cyan);
+  font-size: 1.35rem;
+  margin-bottom: 0.9rem;
 }
-.icon-js { color: #f7df1e; }
-.icon-ai { color: var(--accent-indigo); }
-.icon-cloud { color: var(--accent-cyan); }
-.icon-security { color: var(--accent-emerald); }
+
+.capability-card h4 {
+  font-size: 1rem;
+  margin-bottom: 0.55rem;
+}
+
+.capability-card p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
 
 /* PASSIONS GRID & WIDGETS */
 .passions-grid {
@@ -1392,11 +1323,15 @@ kbd {
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 1024px) {
-  .hero-grid, .pane-grid, .adv-display-grid {
+  .hero-grid, .adv-display-grid {
     grid-template-columns: 1fr;
   }
-  .vision-grid, .passions-grid, .stack-grid, .agenda-timeline {
+  .vision-grid, .passions-grid, .agenda-timeline {
     grid-template-columns: 1fr;
+  }
+  .capability-grid,
+  .capability-grid-tools {
+    grid-template-columns: repeat(2, 1fr);
   }
   .nav-links {
     display: none;
@@ -1428,5 +1363,54 @@ kbd {
     align-items: center;
     flex-direction: column;
     gap: 0.55rem;
+  }
+
+  .timeline-container,
+  .capability-tabs {
+    padding: 1.25rem;
+  }
+
+  .timeline-item {
+    grid-template-columns: 38px 1fr;
+    gap: 0.85rem;
+  }
+
+  .timeline-badge {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+
+  .timeline-item:not(:last-child)::after {
+    top: 38px;
+    left: 18px;
+  }
+
+  .timeline-content {
+    padding: 1.1rem;
+  }
+
+  .timeline-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .tab-headers {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .tab-btn {
+    width: 100%;
+  }
+
+  .capability-grid,
+  .capability-grid-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .capability-card {
+    min-height: 0;
   }
 }

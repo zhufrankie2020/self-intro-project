@@ -11,11 +11,20 @@ const [html, script, css] = await Promise.all([
 ]);
 const site = `${html}\n${script}\n${css}`;
 
-const mustInclude = (text, label = text) =>
-  assert.ok(site.includes(text), `Missing approved content: ${label}`);
+const sectionContent = (id) => {
+  const match = html.match(new RegExp(
+    `<section[^>]+id=["']${id}["'][^>]*>([\\s\\S]*?)<\\/section>`,
+    'i',
+  ));
+  assert.ok(match, `Missing section #${id}`);
+  return match[1];
+};
+const mustIncludeIn = (content, text, label = text) =>
+  assert.ok(content.includes(text), `Missing ${label} in its required section`);
 
 test('publishes the approved professional profile hierarchy', () => {
-  mustInclude('Global Transformation & Technology Leader');
+  const hero = sectionContent('hero');
+  mustIncludeIn(hero, 'Global Transformation & Technology Leader', 'professional title');
 
   for (const id of ['principles', 'capabilities', 'hobbies', 'education', 'connect']) {
     assert.match(html, new RegExp(`<section[^>]+id=["']${id}["']`), `Missing section #${id}`);
@@ -23,12 +32,15 @@ test('publishes the approved professional profile hierarchy', () => {
 });
 
 test('keeps the approved leadership principles and evidence', () => {
+  const hero = sectionContent('hero');
+  const principles = sectionContent('principles');
+
   for (const slogan of [
     'Do the right thing before doing the thing right.',
     'Easier is better.',
     'Grow people. Strengthen teams. Succeed together.',
   ]) {
-    mustInclude(slogan);
+    mustIncludeIn(principles, slogan, 'leadership slogan');
   }
 
   for (const metric of [
@@ -37,25 +49,31 @@ test('keeps the approved leadership principles and evidence', () => {
     '4.9/5 global user CSAT',
     '2x Great Line Manager Award winner',
   ]) {
-    mustInclude(metric);
+    mustIncludeIn(hero, metric, 'evidence metric');
   }
 });
 
 test('keeps the approved capability labels and delivery sequence', () => {
+  const capabilities = sectionContent('capabilities');
   for (const label of [
     'Strategy & Outcomes',
     'People, Process & Delivery',
     'Tools & Technology',
   ]) {
-    mustInclude(label);
+    mustIncludeIn(capabilities, label, 'capability tab label');
   }
 
-  mustInclude('Frame the problem → align the people → mobilise delivery → measure and adapt');
+  mustIncludeIn(
+    capabilities,
+    'Frame the problem → align the people → mobilise delivery → measure and adapt',
+    'delivery sequence',
+  );
 });
 
 test('publishes the five approved hobby stories', () => {
+  const hobbies = sectionContent('hobbies');
   assert.equal(
-    (html.match(/class=["'][^"']*hobby-card/g) ?? []).length,
+    (hobbies.match(/class=["'][^"']*\bhobby-card\b[^"']*["']/g) ?? []).length,
     5,
     'Expected exactly five hobby cards',
   );
@@ -85,24 +103,55 @@ test('publishes the five approved hobby stories', () => {
     'farm operations',
     'New technology becomes meaningful when it helps someone solve a real problem.',
   ]) {
-    mustInclude(detail);
+    mustIncludeIn(hobbies, detail, 'approved hobby detail');
   }
 
-  mustInclude('September 2026 — Planned');
+  mustIncludeIn(hobbies, 'September 2026 — Planned', 'planned journey label');
 });
 
 test('publishes the approved education, contact actions, and local avatar', () => {
+  const hero = sectionContent('hero');
+  const education = sectionContent('education');
+  const connect = sectionContent('connect');
+
   for (const entry of [
     'Master of e-Business Management, University of Technology Sydney',
     'Bachelor of Economics, South China Normal University',
+  ]) {
+    mustIncludeIn(education, entry, 'education entry');
+  }
+
+  for (const entry of [
     'https://www.linkedin.com/in/frankie-zhu-9987a51',
     'mailto:zhu.frankie@gmail.com',
   ]) {
-    mustInclude(entry);
+    mustIncludeIn(connect, entry, 'contact action');
   }
 
-  assert.match(html, /(?:src|href)=["']assets\/frankie-avatar\.png["']/,
+  assert.match(hero, /(?:src|href)=["']assets\/frankie-avatar\.png["']/,
     'Missing local avatar reference assets/frankie-avatar.png');
+});
+
+test('keeps the approved narrative order and confines AI hobbies to Beyond Work', () => {
+  const principlesStart = html.search(/id=["']principles["']/);
+  const capabilitiesStart = html.search(/id=["']capabilities["']/);
+  assert.ok(principlesStart >= 0 && principlesStart < capabilitiesStart,
+    'How I Think and Lead must precede From Strategy to Results');
+
+  const capabilities = sectionContent('capabilities');
+  const labels = ['Strategy & Outcomes', 'People, Process & Delivery', 'Tools & Technology'];
+  const positions = labels.map((label) => capabilities.indexOf(label));
+  assert.ok(positions.every((position) => position >= 0), 'All capability labels must be visible in #capabilities');
+  assert.ok(positions[0] < positions[1] && positions[1] < positions[2],
+    'Capability tabs must be ordered strategy, people/process/delivery, then tools/technology');
+
+  const hobbies = sectionContent('hobbies');
+  const professionalHtml = html.replace(hobbies, '');
+  for (const phrase of ['AI agents', 'vibe coding']) {
+    mustIncludeIn(hobbies, phrase, 'AI exploration hobby evidence');
+    assert.ok(!professionalHtml.toLowerCase().includes(phrase.toLowerCase()),
+      `${phrase} must be confined to the hobbies section`);
+  }
 });
 
 test('excludes private, meeting-specific, and unsupported claims', () => {

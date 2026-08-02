@@ -140,6 +140,59 @@ test('publishes the five approved hobby stories', () => {
   );
 });
 
+test('shows a standard snooker table with all starting balls and hover values', () => {
+  const hobbies = sectionContent('hobbies');
+  const table = hobbies.match(
+    /<div class="snooker-table"[\s\S]*?<p class="snooker-hint">/,
+  )?.[0] ?? '';
+
+  assert.match(
+    table,
+    /aria-label="Standard snooker table with all 22 balls in their starting positions"/,
+    'Standard snooker table label is missing',
+  );
+  assert.equal(
+    (table.match(/class="snooker-ball /g) ?? []).length,
+    22,
+    'Expected the standard 22-ball starting layout',
+  );
+  assert.equal(
+    (table.match(/class="snooker-ball ball-red"/g) ?? []).length,
+    15,
+    'Expected all 15 reds in the starting triangle',
+  );
+  assert.match(table, /class="pocket pocket-mt"/, 'Top-centre pocket is missing');
+  assert.match(table, /class="pocket pocket-mb"/, 'Bottom-centre pocket is missing');
+  assert.doesNotMatch(
+    table,
+    /class="pocket pocket-m[lr]"/,
+    'Centre pockets must not sit on the short ends',
+  );
+
+  for (const tooltip of [
+    'Red — 1 point',
+    'Yellow — 2 points',
+    'Green — 3 points',
+    'Brown — 4 points',
+    'Blue — 5 points',
+    'Pink — 6 points',
+    'Black — 7 points',
+  ]) {
+    assert.ok(table.includes(`data-tooltip="${tooltip}"`), `Missing hover value: ${tooltip}`);
+  }
+
+  assert.doesNotMatch(
+    hobbies,
+    /snooker-scoreboard|pot-red-btn|pot-black-btn|reset-snooker-btn/,
+    'The removed snooker game controls must not return',
+  );
+  assert.match(
+    css,
+    /\.snooker-ball:hover::after,[\s\S]*?\.snooker-ball:focus-visible::after\s*\{[^}]*opacity:\s*1/,
+    'Ball values must appear on hover and keyboard focus',
+  );
+});
+
 test('keeps capability content visible without JavaScript and enhances it when JavaScript is enabled', () => {
   assert.match(css, /\.tab-pane\s*\{[^}]*display:\s*block\s*;[^}]*\}/s,
     'Capability panes must be visible by default without JavaScript');
@@ -261,15 +314,15 @@ test('excludes private, meeting-specific, and unsupported claims', () => {
   }
 });
 
-test('retains the required dependency-free interactions and responsive CSS', () => {
+test('retains the required dependency-free interactions, static snooker table, and responsive CSS', () => {
   assert.match(html, /class=["'][^"']*tab-btn/, 'Capability tabs are missing');
   assert.match(html, /soccer-widget|football-widget/i, 'Football interaction is missing');
-  assert.match(html, /snooker-widget/, 'Snooker break-builder is missing');
+  assert.match(html, /snooker-widget/, 'Static snooker table is missing');
   assert.match(html, /adv-route-selector|motorbike.*selector/i, 'Motorbike selector is missing');
   assert.match(html, /id=["']cmd-k-modal["']/, 'Command menu is missing');
   assert.match(html, /id=["']qr-modal["']/, 'QR modal is missing');
   assert.match(script, /formation/i, 'Football interaction behaviour is missing');
-  assert.match(script, /snooker/i, 'Snooker break-builder behaviour is missing');
+  assert.doesNotMatch(script, /snookerBreak|potRedBtn|potBlackBtn/, 'Removed snooker game behaviour remains');
   assert.match(script, /routeData/, 'Motorbike selector behaviour is missing');
   assert.match(css, /@media\s*\(/, 'Responsive CSS is missing');
 });

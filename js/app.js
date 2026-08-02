@@ -1,6 +1,6 @@
 /* ==========================================================================
    FRANKIE ZHU — SELF INTRO WEB APP INTERACTIVE LOGIC
-   Soccer Pitch, Snooker Break Builder, ADV Touring Map, Cmd+K and QR Sharing
+   Soccer Pitch, ADV Touring Map, Cmd+K and QR Sharing
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -159,186 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFormation('433');
 
   /* ------------------------------------------------------------------------
-     3. SNOOKER BREAK BUILDER WIDGET
-     ------------------------------------------------------------------------ */
-  let snookerBreak = 0;
-  let ballsPotted = 0;
-  let redsRemaining = 15;
-  let snookerPhase = 'red';
-  let clearanceIndex = 0;
-  let snookerAnimating = false;
-  let snookerAnimationTimer = null;
-
-  const redBall = { name: 'red', points: 1, className: 'ball-red' };
-  const blackBall = { name: 'black', points: 7, className: 'ball-black' };
-  const colourClearance = [
-    { name: 'yellow', points: 2, className: 'ball-yellow' },
-    { name: 'green', points: 3, className: 'ball-green' },
-    { name: 'brown', points: 4, className: 'ball-brown' },
-    { name: 'blue', points: 5, className: 'ball-blue' },
-    { name: 'pink', points: 6, className: 'ball-pink' },
-    blackBall,
-  ];
-
-  const breakScoreEl = document.getElementById('snooker-break-score');
-  const ballsCountEl = document.getElementById('snooker-balls-count');
-  const redsRemainingEl = document.getElementById('snooker-reds-remaining');
-  const potRedBtn = document.getElementById('pot-red-btn');
-  const potBlackBtn = document.getElementById('pot-black-btn');
-  const resetSnookerBtn = document.getElementById('reset-snooker-btn');
-  const snookerInsightEl = document.getElementById('snooker-feedback');
-  const cueBall = document.getElementById('snooker-cue-ball');
-  const targetBall = document.getElementById('snooker-target-ball');
-
-  function updateSnookerUI() {
-    if (breakScoreEl) breakScoreEl.textContent = snookerBreak;
-    if (ballsCountEl) ballsCountEl.textContent = ballsPotted;
-    if (redsRemainingEl) redsRemainingEl.textContent = redsRemaining;
-
-    if (potRedBtn) potRedBtn.disabled = snookerAnimating || snookerPhase !== 'red';
-    if (potBlackBtn) {
-      const targetColour = snookerPhase === 'clearance'
-        ? colourClearance[clearanceIndex]
-        : blackBall;
-      const colourIsAvailable = snookerPhase === 'black' || snookerPhase === 'clearance';
-      potBlackBtn.disabled = snookerAnimating || !colourIsAvailable;
-      potBlackBtn.textContent = snookerPhase === 'complete'
-        ? 'Break complete'
-        : 'Pot ' + targetColour.name + ' (' + targetColour.points + 'pt)';
-      potBlackBtn.dataset.targetColour = targetColour.name;
-      potBlackBtn.setAttribute(
-        'aria-label',
-        snookerPhase === 'complete'
-          ? 'Maximum break complete'
-          : 'Pot ' + targetColour.name + ' for ' + targetColour.points + ' points',
-      );
-    }
-  }
-
-  function setTargetBall(target) {
-    if (!targetBall) return;
-    if (!target) {
-      targetBall.style.opacity = '0';
-      return;
-    }
-    targetBall.className = 'ball ' + target.className;
-    targetBall.style.opacity = '1';
-  }
-
-  function triggerBallAnimation(nextTarget) {
-    if (cueBall && targetBall) {
-      snookerAnimating = true;
-      updateSnookerUI();
-      cueBall.style.transform = 'translate(15px, 0)';
-      targetBall.style.transform = 'translate(60px, -20px) scale(0.5)';
-      targetBall.style.opacity = '0.3';
-
-      snookerAnimationTimer = setTimeout(() => {
-        cueBall.style.transform = 'translate(0, 0)';
-        targetBall.style.transform = 'translate(0, 0)';
-        setTargetBall(nextTarget);
-        snookerAnimating = false;
-        snookerAnimationTimer = null;
-        updateSnookerUI();
-      }, 400);
-    } else {
-      setTargetBall(nextTarget);
-      snookerAnimating = false;
-      updateSnookerUI();
-    }
-  }
-
-  if (potRedBtn) {
-    potRedBtn.addEventListener('click', () => {
-      if (snookerAnimating || snookerPhase !== 'red') return;
-      snookerBreak += 1;
-      ballsPotted += 1;
-      redsRemaining -= 1;
-      snookerPhase = 'black';
-      triggerBallAnimation(blackBall);
-
-      if (snookerInsightEl) {
-        snookerInsightEl.innerHTML = '<i class="fa-solid fa-circle-check text-emerald"></i> <strong>Red potted (+1).</strong> '
-          + redsRemaining + ' red' + (redsRemaining === 1 ? '' : 's') + ' remain. Black is next.';
-        hideDecorativeIcons(snookerInsightEl);
-      }
-    });
-  }
-
-  if (potBlackBtn) {
-    potBlackBtn.addEventListener('click', () => {
-      if (snookerAnimating || (snookerPhase !== 'black' && snookerPhase !== 'clearance')) return;
-
-      const pottedColour = snookerPhase === 'clearance'
-        ? colourClearance[clearanceIndex]
-        : blackBall;
-      snookerBreak += pottedColour.points;
-      ballsPotted += 1;
-
-      let nextTarget = null;
-      if (snookerPhase === 'black') {
-        if (redsRemaining > 0) {
-          snookerPhase = 'red';
-          nextTarget = redBall;
-        } else {
-          snookerPhase = 'clearance';
-          clearanceIndex = 0;
-          nextTarget = colourClearance[clearanceIndex];
-        }
-      } else {
-        clearanceIndex += 1;
-        if (clearanceIndex >= colourClearance.length) {
-          snookerPhase = 'complete';
-        } else {
-          nextTarget = colourClearance[clearanceIndex];
-        }
-      }
-
-      triggerBallAnimation(nextTarget);
-
-      if (snookerInsightEl) {
-        if (snookerPhase === 'complete') {
-          snookerInsightEl.innerHTML = '<i class="fa-solid fa-trophy text-amber"></i> <strong>Maximum break complete: 147.</strong> Fifteen red-black pairs followed by all six colours.';
-        } else {
-          const pottedName = pottedColour.name[0].toUpperCase() + pottedColour.name.slice(1);
-          const nextName = nextTarget.name[0].toUpperCase() + nextTarget.name.slice(1);
-          snookerInsightEl.innerHTML = '<i class="fa-solid fa-star text-amber"></i> <strong>'
-            + pottedName + ' potted (+' + pottedColour.points + ').</strong> Break: '
-            + snookerBreak + ' points. ' + nextName + ' is next.';
-        }
-        hideDecorativeIcons(snookerInsightEl);
-      }
-    });
-  }
-
-  if (resetSnookerBtn) {
-    resetSnookerBtn.addEventListener('click', () => {
-      if (snookerAnimationTimer !== null) {
-        clearTimeout(snookerAnimationTimer);
-        snookerAnimationTimer = null;
-      }
-      snookerBreak = 0;
-      ballsPotted = 0;
-      redsRemaining = 15;
-      snookerPhase = 'red';
-      clearanceIndex = 0;
-      snookerAnimating = false;
-      if (cueBall) cueBall.style.transform = 'translate(0, 0)';
-      if (targetBall) targetBall.style.transform = 'translate(0, 0)';
-      setTargetBall(redBall);
-      updateSnookerUI();
-
-      if (snookerInsightEl) {
-        snookerInsightEl.innerHTML = `<i class="fa-solid fa-lightbulb text-amber"></i> <strong>Build 147:</strong> Pair each of the 15 reds with black, then clear yellow, green, brown, blue, pink and black.`;
-        hideDecorativeIcons(snookerInsightEl);
-      }
-    });
-  }
-
-  updateSnookerUI();
-
-  /* ------------------------------------------------------------------------
-     4. ADV MOTORBIKE TOURING WIDGET
+     3. ADV MOTORBIKE TOURING WIDGET
      ------------------------------------------------------------------------ */
   const routeTabs = document.querySelectorAll('.route-tab');
   const routeDetailsEl = document.getElementById('adv-route-details');
@@ -435,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: 'Career Experience', subtitle: 'Transformation, customer experience and technology operations', target: '#experience', icon: 'fa-briefcase' },
     { title: 'From Strategy to Results', subtitle: 'Strategy, people, delivery, tools and technology', target: '#capabilities', icon: 'fa-chart-line' },
     { title: 'Manchester United ⚽ Formation', subtitle: 'Interactive formation switcher and team tactics', target: '#hobbies', icon: 'fa-futbol' },
-    { title: 'Snooker 🎱 Break Builder', subtitle: 'Interactive maximum-break builder', target: '#hobbies', icon: 'fa-circle-dot' },
+    { title: 'Snooker 🎱', subtitle: 'Standard 22-ball table with point values', target: '#hobbies', icon: 'fa-circle-dot' },
     { title: 'ADV Motorbike 🏍️ Journeys', subtitle: 'Completed journeys and the September 2026 plan', target: '#hobbies', icon: 'fa-motorcycle' },
     { title: 'Education', subtitle: 'Academic foundation in e-business management and economics', target: '#education', icon: 'fa-graduation-cap' },
     { title: 'Connect', subtitle: 'LinkedIn and email', target: '#connect', icon: 'fa-paper-plane' },

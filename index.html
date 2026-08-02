@@ -390,47 +390,42 @@
           <p class="hobby-story">I enjoy playing snooker and following the professional game. I admire Ronnie O'Sullivan for his fast tempo, accuracy and effortless style, and Ding Junhui for his stability, precision and disciplined defence. I also enjoy seeing snooker attract more attention in China.</p>
           <p class="aha-moment"><strong>Aha:</strong> Mastery comes from choosing the right tempo: attacking decisively when the opportunity is there, and controlling the table patiently when it is not.</p>
 
-          <div class="snooker-widget" aria-label="Interactive snooker maximum-break builder">
-            <div class="snooker-scoreboard">
-              <div class="score-box">
-                <span class="score-label">Current break</span>
-                <span id="snooker-break-score" class="score-val text-amber">0</span>
-              </div>
-              <div class="score-box">
-                <span class="score-label">Balls potted</span>
-                <span id="snooker-balls-count" class="score-val">0</span>
-              </div>
-              <div class="score-box">
-                <span class="score-label">Reds remaining</span>
-                <span id="snooker-reds-remaining" class="score-val">15</span>
-              </div>
-              <div class="score-box">
-                <span class="score-label">Maximum break</span>
-                <span class="score-val text-emerald">147</span>
-              </div>
-            </div>
-            <div class="snooker-table" id="snooker-table">
-              <div class="table-cushion"></div>
-              <div class="table-baulk-line"></div>
+          <div class="snooker-widget">
+            <div class="snooker-table" role="group" aria-label="Standard snooker table with all 22 balls in their starting positions">
+              <div class="table-baulk-line" aria-hidden="true"></div>
+              <div class="table-baulk-d" aria-hidden="true"></div>
               <div class="pocket pocket-tl"></div>
               <div class="pocket pocket-tr"></div>
-              <div class="pocket pocket-ml"></div>
-              <div class="pocket pocket-mr"></div>
+              <div class="pocket pocket-mt"></div>
+              <div class="pocket pocket-mb"></div>
               <div class="pocket pocket-bl"></div>
               <div class="pocket pocket-br"></div>
-              <div class="snooker-table-center">
-                <div id="snooker-cue-ball" class="ball ball-white"></div>
-                <div id="snooker-target-ball" class="ball ball-red"></div>
-              </div>
+              <span class="snooker-ball ball-white" style="--x: 15%; --y: 59%;" tabindex="0" role="img" aria-label="Cue ball — no points" data-tooltip="Cue ball — no points"></span>
+              <span class="snooker-ball ball-green" style="--x: 22%; --y: 34%;" tabindex="0" role="img" aria-label="Green — 3 points" data-tooltip="Green — 3 points"></span>
+              <span class="snooker-ball ball-brown" style="--x: 22%; --y: 50%;" tabindex="0" role="img" aria-label="Brown — 4 points" data-tooltip="Brown — 4 points"></span>
+              <span class="snooker-ball ball-yellow" style="--x: 22%; --y: 66%;" tabindex="0" role="img" aria-label="Yellow — 2 points" data-tooltip="Yellow — 2 points"></span>
+              <span class="snooker-ball ball-blue" style="--x: 50%; --y: 50%;" tabindex="0" role="img" aria-label="Blue — 5 points" data-tooltip="Blue — 5 points"></span>
+              <span class="snooker-ball ball-pink" style="--x: 63.8%; --y: 50%;" tabindex="0" role="img" aria-label="Pink — 6 points" data-tooltip="Pink — 6 points"></span>
+
+              <span class="snooker-ball ball-red" style="--x: 67%; --y: 50%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 69.8%; --y: 46.6%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 69.8%; --y: 53.4%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 72.6%; --y: 43.2%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 72.6%; --y: 50%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 72.6%; --y: 56.8%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 75.4%; --y: 39.8%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 75.4%; --y: 46.6%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 75.4%; --y: 53.4%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 75.4%; --y: 60.2%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 78.2%; --y: 36.4%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 78.2%; --y: 43.2%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 78.2%; --y: 50%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 78.2%; --y: 56.8%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+              <span class="snooker-ball ball-red" style="--x: 78.2%; --y: 63.6%;" tabindex="0" role="img" aria-label="Red — 1 point" data-tooltip="Red — 1 point"></span>
+
+              <span class="snooker-ball ball-black" style="--x: 88%; --y: 50%;" tabindex="0" role="img" aria-label="Black — 7 points" data-tooltip="Black — 7 points"></span>
             </div>
-            <div class="snooker-actions">
-              <button id="pot-red-btn" class="btn-snooker red" type="button"><i class="fa-solid fa-bullseye"></i> Pot red (1pt)</button>
-              <button id="pot-black-btn" class="btn-snooker black" type="button" data-target-colour="black" disabled><i class="fa-solid fa-star"></i> Pot black (7pt)</button>
-              <button id="reset-snooker-btn" class="btn-snooker-reset" type="button"><i class="fa-solid fa-rotate-left"></i> Reset table</button>
-            </div>
-            <div id="snooker-feedback" class="snooker-insight" aria-live="polite">
-              <i class="fa-solid fa-lightbulb text-amber"></i> <strong>Build 147:</strong> Pair each of the 15 reds with black, then clear yellow, green, brown, blue, pink and black.
-            </div>
+            <p class="snooker-hint"><i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i> Hover over a ball to see its point value.</p>
           </div>
         </article>
 

@@ -1024,116 +1024,124 @@ kbd {
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 1.2rem;
-}
-
-.snooker-scoreboard {
-  display: flex;
-  justify-content: space-around;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 0.8rem;
-  border-radius: var(--radius-sm);
-  margin-bottom: 1rem;
-}
-
-.score-box {
-  text-align: center;
-}
-.score-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  display: block;
-}
-.score-val {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 700;
+  padding: 1.4rem;
 }
 
 .snooker-table {
   width: 100%;
-  height: 180px;
-  background: #065f46;
-  border: 10px solid #78350f;
+  aspect-ratio: 2 / 1;
+  background: #08734f;
+  border: clamp(7px, 1.8vw, 11px) solid #6b3718;
   border-radius: var(--radius-md);
   position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+  box-shadow:
+    inset 0 0 24px rgba(0, 0, 0, 0.55),
+    0 8px 20px rgba(0, 0, 0, 0.28);
 }
 
 .pocket {
   position: absolute;
-  width: 22px;
-  height: 22px;
-  background: #0f172a;
+  width: clamp(14px, 4.2%, 22px);
+  aspect-ratio: 1;
+  background: #080b10;
   border-radius: 50%;
+  z-index: 3;
 }
-.pocket-tl { top: -4px; left: -4px; }
-.pocket-tr { top: -4px; right: -4px; }
-.pocket-ml { top: 50%; left: -6px; transform: translateY(-50%); }
-.pocket-mr { top: 50%; right: -6px; transform: translateY(-50%); }
-.pocket-bl { bottom: -4px; left: -4px; }
-.pocket-br { bottom: -4px; right: -4px; }
+.pocket-tl { top: -7px; left: -7px; }
+.pocket-tr { top: -7px; right: -7px; }
+.pocket-mt { top: -9px; left: 50%; transform: translateX(-50%); }
+.pocket-mb { bottom: -9px; left: 50%; transform: translateX(-50%); }
+.pocket-bl { bottom: -7px; left: -7px; }
+.pocket-br { bottom: -7px; right: -7px; }
 
-.snooker-table-center {
+.table-baulk-line {
   position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
+  top: 0;
+  bottom: 0;
+  left: 22%;
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.ball {
-  width: 22px;
-  height: 22px;
+.table-baulk-d {
+  position: absolute;
+  top: 33.7%;
+  left: 13.8%;
+  width: 8.2%;
+  height: 32.6%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 0;
+  border-radius: 100% 0 0 100% / 50% 0 0 50%;
+}
+
+.snooker-ball {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: clamp(10px, 3.4%, 17px);
+  aspect-ratio: 1;
   border-radius: 50%;
-  box-shadow: inset -2px -2px 5px rgba(0,0,0,0.5), 2px 2px 8px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  box-shadow:
+    inset -2px -2px 4px rgba(0, 0, 0, 0.55),
+    1px 2px 5px rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
+  cursor: help;
+  z-index: 2;
 }
-.ball-white { background: #ffffff; }
-.ball-red { background: #ef4444; }
+.ball-white { background: #f8fafc; }
+.ball-red { background: #dc2626; }
 .ball-yellow { background: #facc15; }
-.ball-green { background: #22c55e; border: 1px solid #bbf7d0; }
+.ball-green { background: #16a34a; }
 .ball-brown { background: #92400e; }
-.ball-blue { background: #3b82f6; }
+.ball-blue { background: #2563eb; }
 .ball-pink { background: #ec4899; }
-.ball-black { background: #000000; border: 1px solid #334155; }
+.ball-black { background: #050505; border-color: #64748b; }
 
-.snooker-actions {
-  display: flex;
-  gap: 0.8rem;
-  margin-top: 1rem;
-}
-
-.btn-snooker {
-  flex: 1;
-  padding: 0.6rem;
-  font-size: 0.85rem;
-  border-radius: var(--radius-sm);
-}
-.btn-snooker.red { background: #ef4444; color: #fff; }
-.btn-snooker.black { background: #1e293b; color: #fff; border: 1px solid #475569; }
-.btn-snooker.black[data-target-colour="yellow"] { background: #eab308; color: #111827; }
-.btn-snooker.black[data-target-colour="green"] { background: #15803d; }
-.btn-snooker.black[data-target-colour="brown"] { background: #92400e; }
-.btn-snooker.black[data-target-colour="blue"] { background: #2563eb; }
-.btn-snooker.black[data-target-colour="pink"] { background: #db2777; }
-.btn-snooker:disabled { opacity: 0.4; cursor: not-allowed; }
-
-.btn-snooker-reset {
-  background: transparent;
+.snooker-ball::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  width: max-content;
+  max-width: 130px;
+  padding: 0.35rem 0.5rem;
   border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-sm);
+  border-radius: 6px;
+  background: #0f172a;
+  color: #f8fafc;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.2;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+  white-space: nowrap;
+  z-index: 10;
 }
-.btn-snooker-reset:hover { color: var(--text-primary); }
 
-.snooker-insight {
-  margin-top: 1rem;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+.snooker-ball:hover,
+.snooker-ball:focus-visible {
+  z-index: 12;
+  outline: 2px solid #f8fafc;
+  outline-offset: 2px;
+}
+
+.snooker-ball:hover::after,
+.snooker-ball:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.snooker-hint {
+  margin: 0.9rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.snooker-hint i {
+  margin-right: 0.35rem;
 }
 
 /* WIDGET 3: ADV MOTORBIKE */

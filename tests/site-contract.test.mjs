@@ -4,10 +4,11 @@ import { readFile } from 'node:fs/promises';
 
 const root = new URL('../', import.meta.url);
 const readSiteFile = (path) => readFile(new URL(path, root), 'utf8');
-const [html, script, css] = await Promise.all([
+const [html, script, css, qrAsset] = await Promise.all([
   readSiteFile('index.html'),
   readSiteFile('js/app.js'),
   readSiteFile('css/style.css'),
+  readFile(new URL('assets/profile-qr.png', root)).catch(() => Buffer.alloc(0)),
 ]);
 const site = `${html}\n${script}\n${css}`;
 
@@ -43,6 +44,14 @@ test('keeps the approved leadership principles and evidence', () => {
     mustIncludeIn(principles, slogan, 'leadership slogan');
   }
 
+  for (const explanation of [
+    'Strategy starts with the business problem, the outcome we want and how success will be measured. Execution cannot compensate for choosing the wrong priority.',
+    'Turn strategy into clear ownership, practical governance and a delivery path teams can follow. Remove unnecessary complexity from customer journeys, processes and technology.',
+    'Support talent development, create clarity and trust, and give people room to contribute. Sustainable transformation depends on capable people and teams succeeding together.',
+  ]) {
+    mustIncludeIn(principles, explanation, 'leadership-principle explanation');
+  }
+
   for (const metric of [
     '20+ years in technology and transformation',
     '0% to 80% digital-channel adoption',
@@ -51,6 +60,23 @@ test('keeps the approved leadership principles and evidence', () => {
   ]) {
     mustIncludeIn(hero, metric, 'evidence metric');
   }
+});
+
+test('uses the approved ownership wording and hero actions', () => {
+  const hero = sectionContent('hero');
+  const experience = sectionContent('experience');
+
+  mustIncludeIn(
+    experience,
+    'Defined a global AI operating and governance model, supporting a reported 20% productivity improvement and 4.8/5 user satisfaction.',
+    'approved GenAI ownership wording',
+  );
+  assert.ok(!experience.includes('Built a global AI operating and governance model'),
+    'GenAI ownership must not be overstated as Built');
+  assert.match(hero, /href=["']#experience["'][^>]*>[\s\S]*?Explore my transformation experience[\s\S]*?<\/a>/,
+    'Missing approved primary hero action');
+  assert.match(hero, /href=["']#hobbies["'][^>]*>[\s\S]*?Beyond work[\s\S]*?<\/a>/,
+    'Missing approved secondary hero action');
 });
 
 test('keeps the approved capability labels and delivery sequence', () => {
@@ -107,6 +133,65 @@ test('publishes the five approved hobby stories', () => {
   }
 
   mustIncludeIn(hobbies, 'September 2026 — Planned', 'planned journey label');
+  mustIncludeIn(
+    hobbies,
+    'helping a friend establish China–Australia e-trade workflows using AI agents',
+    'anonymous friend e-trade example',
+  );
+});
+
+test('keeps capability content visible without JavaScript and enhances it when JavaScript is enabled', () => {
+  assert.match(css, /\.tab-pane\s*\{[^}]*display:\s*block\s*;[^}]*\}/s,
+    'Capability panes must be visible by default without JavaScript');
+  assert.match(css, /\.js\s+\.tab-pane\s*\{[^}]*display:\s*none\s*;[^}]*\}/s,
+    'JavaScript-enabled pages must hide inactive capability panes');
+  assert.match(css, /\.js\s+\.tab-pane\.active\s*\{[^}]*display:\s*block\s*;[^}]*\}/s,
+    'JavaScript-enabled pages must show the active capability pane');
+
+  const enhancementScript = html.indexOf("document.documentElement.classList.add('js')");
+  const stylesheet = html.indexOf('href="css/style.css"');
+  assert.ok(enhancementScript >= 0 && enhancementScript < stylesheet,
+    'The JS-enabled class must be applied before CSS loads to avoid a capability-pane flash');
+});
+
+test('uses a local generated QR asset and a clickable canonical URL', () => {
+  const qrModal = html.match(/<div id=["']qr-modal["'][\s\S]*?<script src=/i)?.[0] ?? '';
+  assert.match(qrModal, /src=["']assets\/profile-qr\.png["']/,
+    'QR modal must reference the generated local QR image');
+  assert.match(
+    qrModal,
+    /href=["']https:\/\/zhufrankie2020\.github\.io\/self-intro-project\/["']/,
+    'Canonical profile URL must be clickable',
+  );
+  assert.equal(qrAsset.subarray(1, 4).toString('ascii'), 'PNG',
+    'Generated QR asset must be a PNG file');
+  assert.ok(qrAsset.length > 500, 'Generated QR asset is unexpectedly small');
+});
+
+test('keeps muted small text at or above WCAG AA contrast on page and card backgrounds', () => {
+  const muted = css.match(/--text-muted:\s*#([0-9a-f]{6})/i)?.[1];
+  assert.ok(muted, 'Missing six-digit --text-muted colour');
+
+  const toRgb = (hex) => hex.match(/../g).map((part) => Number.parseInt(part, 16));
+  const composite = (foreground, alpha, background) => foreground.map(
+    (channel, index) => Math.round((channel * alpha) + (background[index] * (1 - alpha))),
+  );
+  const luminance = (rgb) => rgb
+    .map((channel) => {
+      const value = channel / 255;
+      return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+    })
+    .reduce((total, value, index) => total + value * [0.2126, 0.7152, 0.0722][index], 0);
+  const contrast = (foreground, background) => {
+    const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+    return (values[0] + 0.05) / (values[1] + 0.05);
+  };
+
+  const page = toRgb('0b0f19');
+  const card = composite(toRgb('111827'), 0.7, page);
+  const mutedRgb = toRgb(muted);
+  assert.ok(contrast(mutedRgb, page) >= 4.5, '--text-muted fails 4.5:1 on the page background');
+  assert.ok(contrast(mutedRgb, card) >= 4.5, '--text-muted fails 4.5:1 on the card background');
 });
 
 test('publishes the approved education, contact actions, and local avatar', () => {
@@ -166,6 +251,11 @@ test('excludes private, meeting-specific, and unsupported claims', () => {
     /coastal routes?/i,
     /\bPMP\b/i,
     /\bITIL\b/i,
+    /GenAI Dev-Sec-Ops/i,
+    /HappySignal XLA/i,
+    /Guangzhou\s*&\s*Global/i,
+    /Fluent EN\s*\/\s*CN\s*\/\s*Cantonese/i,
+    /Google Antigravity AI/i,
   ]) {
     assert.ok(!forbidden.test(site), `Forbidden claim remains: ${forbidden}`);
   }

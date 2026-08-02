@@ -17,7 +17,7 @@
 
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-muted: #748399;
 
   /* Accents */
   --accent-indigo: #6366f1;
@@ -562,6 +562,17 @@ kbd {
   line-height: 1.6;
 }
 
+.vision-card .principle-slogan {
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  margin-bottom: 0.9rem;
+}
+
+.vision-card .principle-explanation {
+  font-size: 0.92rem;
+}
+
 /* CAREER TIMELINE STYLES */
 .timeline-container {
   padding: 2.5rem;
@@ -704,10 +715,26 @@ kbd {
 }
 
 .tab-pane {
+  display: block;
+}
+
+.tab-pane + .tab-pane {
+  border-top: 1px solid var(--border-color);
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
+
+.js .tab-pane {
   display: none;
 }
 
-.tab-pane.active {
+.js .tab-pane + .tab-pane {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.js .tab-pane.active {
   display: block;
 }
 
@@ -1377,12 +1404,28 @@ kbd {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
+.qr-code-box img {
+  display: block;
+  height: auto;
+  max-width: min(264px, 65vw);
+  width: 100%;
+}
+
 .qr-url-badge {
   background: rgba(255, 255, 255, 0.05);
   padding: 0.5rem 1rem;
   border-radius: var(--radius-full);
   display: inline-block;
   font-size: 0.85rem;
+}
+
+.qr-url-badge a {
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.qr-url-badge a:hover {
+  color: var(--text-primary);
 }
 
 /* RESPONSIVE DESIGN */

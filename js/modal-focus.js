@@ -50,5 +50,36 @@
     focusWithoutScrolling(element);
   }
 
-  global.modalFocus = { trapTabFocus, restoreFocus };
+  function getNextCommandIndex(currentIndex, key, itemCount) {
+    if (itemCount <= 0) return -1;
+    if (key === 'ArrowDown') return currentIndex < 0 ? 0 : (currentIndex + 1) % itemCount;
+    if (key === 'ArrowUp') return currentIndex < 0 ? itemCount - 1 : (currentIndex - 1 + itemCount) % itemCount;
+    return currentIndex;
+  }
+
+  function focusSectionHeading(section) {
+    const heading = section?.querySelector?.('h1, h2, h3, h4, h5, h6');
+    if (!heading) return false;
+
+    const hadTabIndex = heading.hasAttribute('tabindex');
+    const previousTabIndex = heading.getAttribute('tabindex');
+    if (!hadTabIndex) heading.setAttribute('tabindex', '-1');
+
+    if (!hadTabIndex) {
+      heading.addEventListener('blur', () => heading.removeAttribute('tabindex'), { once: true });
+    } else if (previousTabIndex !== null) {
+      heading.setAttribute('tabindex', previousTabIndex);
+    }
+
+    section.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+    focusWithoutScrolling(heading);
+    return true;
+  }
+
+  global.modalFocus = {
+    trapTabFocus,
+    restoreFocus,
+    getNextCommandIndex,
+    focusSectionHeading,
+  };
 }(globalThis));

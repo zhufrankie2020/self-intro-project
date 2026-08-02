@@ -90,10 +90,54 @@ test('modal focus keeps a single control contained and gives an empty dialog a f
   assert.equal(emptyDialog.focusCalls.length, 1);
 });
 
-test('command navigation returns focus before scrolling to its destination', () => {
-  assert.doesNotMatch(
+test('command navigation handles arrow keys and focuses section destinations', () => {
+  assert.match(
     appSource,
-    /closeCmdK\(\{ returnFocus: false \}\);/,
-    'Command navigation must not discard focus restoration',
+    /cmdKInput\?\.addEventListener\(['"]keydown['"][\s\S]*ArrowDown[\s\S]*ArrowUp[\s\S]*Enter/,
+    'Command input must handle Arrow Down, Arrow Up and Enter',
   );
+  assert.match(
+    appSource,
+    /modalFocus\?\.focusSectionHeading/,
+    'Section commands must focus their destination heading',
+  );
+});
+
+test('command navigation moves the active result with Arrow Down and Arrow Up', () => {
+  const helpers = loadFocusHelpers(null);
+
+  assert.equal(helpers.getNextCommandIndex(0, 'ArrowDown', 3), 1);
+  assert.equal(helpers.getNextCommandIndex(2, 'ArrowDown', 3), 0);
+  assert.equal(helpers.getNextCommandIndex(0, 'ArrowUp', 3), 2);
+  assert.equal(helpers.getNextCommandIndex(1, 'Enter', 3), 1);
+});
+
+test('section command focus uses a temporary tabindex on the destination heading', () => {
+  const heading = createElement('heading');
+  const attributes = new Map();
+  let blurHandler;
+  heading.hasAttribute = (name) => attributes.has(name);
+  heading.getAttribute = (name) => attributes.get(name) ?? null;
+  heading.setAttribute = (name, value) => attributes.set(name, String(value));
+  heading.removeAttribute = (name) => attributes.delete(name);
+  heading.addEventListener = (name, handler) => {
+    if (name === 'blur') blurHandler = handler;
+  };
+  const section = {
+    querySelector: () => heading,
+    scrollCalls: [],
+    scrollIntoView(options) {
+      this.scrollCalls.push(options);
+    },
+  };
+  const helpers = loadFocusHelpers(null);
+
+  helpers.focusSectionHeading(section);
+
+  assert.equal(attributes.get('tabindex'), '-1');
+  assert.equal(heading.focusCalls.length, 1);
+  assert.equal(heading.focusCalls[0].preventScroll, true);
+  assert.equal(section.scrollCalls.length, 1);
+  blurHandler();
+  assert.equal(attributes.has('tabindex'), false);
 });

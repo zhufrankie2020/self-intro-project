@@ -335,6 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cmdKInput = document.getElementById('cmd-k-input');
   const cmdKResults = document.getElementById('cmd-k-results');
   let cmdKTrigger = null;
+  let activeCommandIndex = -1;
 
   const commands = [
     { title: 'Profile Summary', subtitle: 'Frankie (Yifan) Zhu - global transformation and technology leader', target: '#hero', icon: 'fa-user' },
@@ -364,6 +365,39 @@ document.addEventListener('DOMContentLoaded', () => {
     if (returnFocus) window.modalFocus?.restoreFocus(cmdKTrigger);
   }
 
+  function getCommandItems() {
+    return Array.from(cmdKResults?.querySelectorAll('[data-command-index]') ?? []);
+  }
+
+  function updateActiveCommand(index, scrollIntoView = false) {
+    const items = getCommandItems();
+    activeCommandIndex = items.length === 0 ? -1 : Math.max(0, Math.min(index, items.length - 1));
+
+    items.forEach((item, itemIndex) => {
+      const isActive = itemIndex === activeCommandIndex;
+      item.classList.toggle('active', isActive);
+      item.setAttribute('aria-selected', String(isActive));
+      if (isActive && scrollIntoView) item.scrollIntoView({ block: 'nearest' });
+    });
+
+    const activeItem = items[activeCommandIndex];
+    if (activeItem) cmdKInput?.setAttribute('aria-activedescendant', activeItem.id);
+    else cmdKInput?.removeAttribute('aria-activedescendant');
+  }
+
+  function activateCommand(cmd) {
+    if (cmd.target) {
+      const destination = document.querySelector(cmd.target);
+      closeCmdK({ returnFocus: false });
+      if (!window.modalFocus?.focusSectionHeading(destination)) {
+        window.modalFocus?.restoreFocus(cmdKTrigger);
+      }
+    } else if (cmd.action === 'QR_MODE') {
+      closeCmdK({ returnFocus: false });
+      openQR(cmdKTrigger);
+    }
+  }
+
   function renderCmdResults(filterText) {
     if (!cmdKResults) return;
     cmdKResults.innerHTML = '';
@@ -375,13 +409,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (filtered.length === 0) {
       cmdKResults.innerHTML = `<div class="cmd-item"><span style="color:var(--text-muted)">No matching commands found...</span></div>`;
+      updateActiveCommand(-1);
       return;
     }
 
     filtered.forEach((cmd, idx) => {
       const item = document.createElement('button');
       item.type = 'button';
-      item.className = `cmd-item ${idx === 0 ? 'active' : ''}`;
+      item.className = 'cmd-item';
+      item.id = `cmd-result-${idx}`;
+      item.dataset.commandIndex = String(idx);
+      item.setAttribute('aria-selected', 'false');
       item.innerHTML = `
         <div style="display:flex; align-items:center; gap:0.8rem">
           <i class="fa-solid ${cmd.icon} text-indigo"></i>
@@ -394,17 +432,13 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       item.addEventListener('click', () => {
-        closeCmdK();
-        if (cmd.target) {
-          document.querySelector(cmd.target)?.scrollIntoView({ behavior: 'smooth' });
-        } else if (cmd.action === 'QR_MODE') {
-          openQR(cmdKTrigger);
-        }
+        activateCommand(cmd);
       });
 
       cmdKResults.appendChild(item);
     });
 
+    updateActiveCommand(0);
     hideDecorativeIcons(cmdKResults);
   }
 
@@ -413,6 +447,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   cmdKInput?.addEventListener('input', (e) => {
     renderCmdResults(e.target.value);
+  });
+
+  cmdKInput?.addEventListener('keydown', (event) => {
+    const items = getCommandItems();
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      const nextIndex = window.modalFocus?.getNextCommandIndex(
+        activeCommandIndex,
+        event.key,
+        items.length,
+      ) ?? activeCommandIndex;
+      updateActiveCommand(nextIndex, true);
+    } else if (event.key === 'Enter' && activeCommandIndex >= 0) {
+      event.preventDefault();
+      items[activeCommandIndex]?.click();
+    }
   });
 
   window.addEventListener('keydown', (e) => {
@@ -438,7 +488,6 @@ document.addEventListener('DOMContentLoaded', () => {
      ------------------------------------------------------------------------ */
   const qrModal = document.getElementById('qr-modal');
   const qrCloseBtn = document.getElementById('qr-close-btn');
-  const heroQrBtn = document.getElementById('hero-qr-btn');
   const footerQrBtn = document.getElementById('footer-qr-btn');
   let qrTrigger = null;
 
@@ -455,7 +504,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.modalFocus?.restoreFocus(qrTrigger);
   }
 
-  heroQrBtn?.addEventListener('click', () => openQR(heroQrBtn));
   footerQrBtn?.addEventListener('click', () => openQR(footerQrBtn));
   qrCloseBtn?.addEventListener('click', closeQR);
   qrModal?.addEventListener('click', (e) => {

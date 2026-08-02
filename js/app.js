@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cmdKModal?.classList.add('hidden');
     cmdKModal?.setAttribute('aria-hidden', 'true');
     if (cmdKInput) cmdKInput.value = '';
-    if (returnFocus) cmdKTrigger?.focus();
+    if (returnFocus) window.modalFocus?.restoreFocus(cmdKTrigger);
   }
 
   function renderCmdResults(filterText) {
@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       item.addEventListener('click', () => {
-        closeCmdK({ returnFocus: false });
+        closeCmdK();
         if (cmd.target) {
           document.querySelector(cmd.target)?.scrollIntoView({ behavior: 'smooth' });
         } else if (cmd.action === 'QR_MODE') {
@@ -429,6 +429,9 @@ document.addEventListener('DOMContentLoaded', () => {
   cmdKModal?.addEventListener('click', (e) => {
     if (e.target === cmdKModal) closeCmdK();
   });
+  cmdKModal?.addEventListener('keydown', (e) => {
+    window.modalFocus?.trapTabFocus(e, cmdKModal);
+  });
 
   /* ------------------------------------------------------------------------
      6. QR CODE MODAL
@@ -449,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeQR() {
     qrModal?.classList.add('hidden');
     qrModal?.setAttribute('aria-hidden', 'true');
-    qrTrigger?.focus();
+    window.modalFocus?.restoreFocus(qrTrigger);
   }
 
   heroQrBtn?.addEventListener('click', () => openQR(heroQrBtn));
@@ -457,6 +460,9 @@ document.addEventListener('DOMContentLoaded', () => {
   qrCloseBtn?.addEventListener('click', closeQR);
   qrModal?.addEventListener('click', (e) => {
     if (e.target === qrModal) closeQR();
+  });
+  qrModal?.addEventListener('keydown', (e) => {
+    window.modalFocus?.trapTabFocus(e, qrModal);
   });
 
   hideDecorativeIcons();

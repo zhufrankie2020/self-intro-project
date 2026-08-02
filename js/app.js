@@ -32,43 +32,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const formations = {
     '433': [
-      { id: 1, name: 'GK (Goalie)', pos: { x: 50, y: 90 }, role: 'Risk Management & Safety Net' },
-      { id: 2, name: 'RB (Right Back)', pos: { x: 80, y: 72 }, role: 'Agile Overlapping & Support' },
-      { id: 3, name: 'CB (Center Back)', pos: { x: 62, y: 78 }, role: 'Core Security & Resilience' },
-      { id: 4, name: 'CB (Center Back)', pos: { x: 38, y: 78 }, role: 'Core Security & Resilience' },
-      { id: 5, name: 'LB (Left Back)', pos: { x: 20, y: 72 }, role: 'Agile Overlapping & Support' },
-      { id: 6, name: 'CDM (Anchor)', pos: { x: 50, y: 55 }, role: 'Architectural Balance & Control' },
-      { id: 7, name: 'CM (Playmaker)', pos: { x: 70, y: 40 }, role: 'Strategic Delivery Orchestrator' },
-      { id: 8, name: 'CM (Engine)', pos: { x: 30, y: 40 }, role: 'Sprint Execution & Velocity' },
-      { id: 9, name: 'RW (Wing Forward)', pos: { x: 82, y: 20 }, role: 'Product Feature Innovation' },
-      { id: 10, name: 'ST (Striker)', pos: { x: 50, y: 15 }, role: 'Go-to-Market KPI Execution' },
-      { id: 11, name: 'LW (Wing Forward)', pos: { x: 18, y: 20 }, role: 'AI Agentic Automation' }
+      { id: 1, name: 'GK (Goalie)', pos: { x: 50, y: 90 }, role: 'Risk Control & 99% SLA Stability' },
+      { id: 2, name: 'RB (Right Back)', pos: { x: 80, y: 72 }, role: 'Omni-channel Digital Support' },
+      { id: 3, name: 'CB (Center Back)', pos: { x: 62, y: 78 }, role: 'GenAI Dev-Sec-Ops Governance' },
+      { id: 4, name: 'CB (Center Back)', pos: { x: 38, y: 78 }, role: 'Responsible AI & Security Audit' },
+      { id: 5, name: 'LB (Left Back)', pos: { x: 20, y: 72 }, role: 'HappySignal XLA & CSAT 4.9/5' },
+      { id: 6, name: 'CDM (Anchor)', pos: { x: 50, y: 55 }, role: 'ITIL Master & PMP Architecture' },
+      { id: 7, name: 'CM (Playmaker)', pos: { x: 70, y: 40 }, role: 'Strategic Delivery Head (Frankie)' },
+      { id: 8, name: 'CM (Engine)', pos: { x: 30, y: 40 }, role: '0% ➔ 80% Digital Adoption' },
+      { id: 9, name: 'RW (Wing Forward)', pos: { x: 82, y: 20 }, role: 'Productivity & AI Chatbot' },
+      { id: 10, name: 'ST (Striker)', pos: { x: 50, y: 15 }, role: '2x Global GLM Award Winner' },
+      { id: 11, name: 'LW (Wing Forward)', pos: { x: 18, y: 20 }, role: 'Agentic AI Workflows' }
     ],
     '4231': [
       { id: 1, name: 'GK', pos: { x: 50, y: 90 }, role: 'Enterprise Risk Shield' },
-      { id: 2, name: 'RB', pos: { x: 82, y: 75 }, role: 'Wing Back Delivery' },
-      { id: 3, name: 'CB', pos: { x: 63, y: 80 }, role: 'Infrastructure Stability' },
-      { id: 4, name: 'CB', pos: { x: 37, y: 80 }, role: 'Data Governance' },
-      { id: 5, name: 'LB', pos: { x: 18, y: 75 }, role: 'Wing Back Delivery' },
-      { id: 6, name: 'CDM', pos: { x: 62, y: 60 }, role: 'Core Tech Lead' },
-      { id: 7, name: 'CDM', pos: { x: 38, y: 60 }, role: 'Security & Compliance' },
-      { id: 8, name: 'RAM', pos: { x: 78, y: 35 }, role: 'Frontend UX Lead' },
-      { id: 9, name: 'CAM', pos: { x: 50, y: 32 }, role: 'Strategy & Delivery Head (Frankie)' },
-      { id: 10, name: 'LAM', pos: { x: 22, y: 35 }, role: 'AI Innovation Lead' },
-      { id: 11, name: 'ST', pos: { x: 50, y: 14 }, role: 'Target Release Delivery' }
+      { id: 2, name: 'RB', pos: { x: 82, y: 75 }, role: 'Mars & HP China Track Record' },
+      { id: 3, name: 'CB', pos: { x: 63, y: 80 }, role: 'GenAI Platform 96% Availability' },
+      { id: 4, name: 'CB', pos: { x: 37, y: 80 }, role: 'SAP & ServiceNow Ecosystem' },
+      { id: 5, name: 'LB', pos: { x: 18, y: 75 }, role: 'Customer Experience Transformation' },
+      { id: 6, name: 'CDM', pos: { x: 62, y: 60 }, role: 'Regional Team Lead (50 Squad)' },
+      { id: 7, name: 'CDM', pos: { x: 38, y: 60 }, role: 'Global IT Operations Governance' },
+      { id: 8, name: 'RAM', pos: { x: 78, y: 35 }, role: 'Automation Utilization (+200% T1)' },
+      { id: 9, name: 'CAM', pos: { x: 50, y: 32 }, role: 'Frankie (Yifan) Zhu — Delivery Head' },
+      { id: 10, name: 'LAM', pos: { x: 22, y: 35 }, role: 'Gallup Top 5 Team Engagement' },
+      { id: 11, name: 'ST', pos: { x: 50, y: 14 }, role: '20+ Yrs Business Value Delivery' }
     ],
     '352': [
-      { id: 1, name: 'GK', pos: { x: 50, y: 90 }, role: 'Enterprise Safety' },
-      { id: 2, name: 'CB', pos: { x: 75, y: 78 }, role: 'Right Flank Defense' },
-      { id: 3, name: 'CB', pos: { x: 50, y: 80 }, role: 'Central Anchor' },
-      { id: 4, name: 'CB', pos: { x: 25, y: 78 }, role: 'Left Flank Defense' },
-      { id: 5, name: 'RWB', pos: { x: 88, y: 48 }, role: 'Scalable Integration' },
-      { id: 6, name: 'CM', pos: { x: 65, y: 52 }, role: 'Data Pipeline Lead' },
-      { id: 7, name: 'CM', pos: { x: 50, y: 45 }, role: 'Delivery Lead (Frankie)' },
-      { id: 8, name: 'CM', pos: { x: 35, y: 52 }, role: 'DevOps & Cloud Lead' },
-      { id: 9, name: 'LWB', pos: { x: 12, y: 48 }, role: 'Scalable Integration' },
-      { id: 10, name: 'ST', pos: { x: 62, y: 18 }, role: 'Business Value Delivery' },
-      { id: 11, name: 'ST', pos: { x: 38, y: 18 }, role: 'Customer Experience Impact' }
+      { id: 1, name: 'GK', pos: { x: 50, y: 90 }, role: 'Operational Excellence' },
+      { id: 2, name: 'CB', pos: { x: 75, y: 78 }, role: 'GenAI Dev-Sec-Ops' },
+      { id: 3, name: 'CB', pos: { x: 50, y: 80 }, role: 'Enterprise Core Anchor' },
+      { id: 4, name: 'CB', pos: { x: 25, y: 78 }, role: 'Compliance & Audit Assurance' },
+      { id: 5, name: 'RWB', pos: { x: 88, y: 48 }, role: 'Omni-channel Support' },
+      { id: 6, name: 'CM', pos: { x: 65, y: 52 }, role: 'ITIL Master Framework' },
+      { id: 7, name: 'CM', pos: { x: 50, y: 45 }, role: 'Frankie Zhu (Strategic Leader)' },
+      { id: 8, name: 'CM', pos: { x: 35, y: 52 }, role: 'PMP Programme Director' },
+      { id: 9, name: 'LWB', pos: { x: 12, y: 48 }, role: 'HappySignal XLA Metrics' },
+      { id: 10, name: 'ST', pos: { x: 62, y: 18 }, role: '2x GLM Leadership Award' },
+      { id: 11, name: 'ST', pos: { x: 38, y: 18 }, role: '4.9/5 User CSAT Score' }
     ]
   };
 
@@ -376,9 +376,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const cmdKResults = document.getElementById('cmd-k-results');
 
   const commands = [
-    { title: 'Hero & Overview', subtitle: 'Jump to main introduction & metrics', target: '#hero', icon: 'fa-user' },
-    { title: 'Leadership Vision', subtitle: 'Strategic clarity & squad empowerment', target: '#vision', icon: 'fa-compass' },
-    { title: 'Hands-on AI & Tech Stack', subtitle: 'Antigravity AI workflow & engineering architecture', target: '#tech-capability', icon: 'fa-code' },
+    { title: 'Hero & Summary', subtitle: 'Frankie (Yifan) Zhu - 20+ Yrs IT & GenAI Leader', target: '#hero', icon: 'fa-user' },
+    { title: 'How I Think and Lead', subtitle: 'Clear direction, easier execution and stronger teams', target: '#principles', icon: 'fa-compass' },
+    { title: '20+ Yrs Career Experience', subtitle: 'Mars (15+ Yrs) & HP China track record', target: '#experience', icon: 'fa-briefcase' },
+    { title: 'GenAI & Tech Capability', subtitle: 'GenAI Dev-Sec-Ops, ITIL Master & PMP Certifications', target: '#tech-capability', icon: 'fa-code' },
     { title: 'Soccer ⚽ Tactical Pitch', subtitle: 'Interactive formation switcher & team tactics', target: '#passions', icon: 'fa-futbol' },
     { title: 'Snooker 🎱 Break Builder', subtitle: 'Interactive 147 break potting simulator', target: '#passions', icon: 'fa-circle-dot' },
     { title: 'ADV Motorbike 🏍️ Routes', subtitle: 'Route 318 & mountain pass tour profiles', target: '#passions', icon: 'fa-motorcycle' },

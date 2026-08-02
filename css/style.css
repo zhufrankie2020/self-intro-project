@@ -1093,6 +1093,11 @@ kbd {
 }
 .ball-white { background: #ffffff; }
 .ball-red { background: #ef4444; }
+.ball-yellow { background: #facc15; }
+.ball-green { background: #22c55e; border: 1px solid #bbf7d0; }
+.ball-brown { background: #92400e; }
+.ball-blue { background: #3b82f6; }
+.ball-pink { background: #ec4899; }
 .ball-black { background: #000000; border: 1px solid #334155; }
 
 .snooker-actions {
@@ -1109,6 +1114,11 @@ kbd {
 }
 .btn-snooker.red { background: #ef4444; color: #fff; }
 .btn-snooker.black { background: #1e293b; color: #fff; border: 1px solid #475569; }
+.btn-snooker.black[data-target-colour="yellow"] { background: #eab308; color: #111827; }
+.btn-snooker.black[data-target-colour="green"] { background: #15803d; }
+.btn-snooker.black[data-target-colour="brown"] { background: #92400e; }
+.btn-snooker.black[data-target-colour="blue"] { background: #2563eb; }
+.btn-snooker.black[data-target-colour="pink"] { background: #db2777; }
 .btn-snooker:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .btn-snooker-reset {

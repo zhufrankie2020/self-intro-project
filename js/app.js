@@ -174,7 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
       statusLabel: 'Completed',
       statusClass: 'completed-status',
       desc: 'My first major post-COVID journey: solo snow riding, repeated falls, lifting the bike and continuing until I reached Lhasa.',
-      points: ['Solo snow riding', 'Fell, lifted the bike and reset', 'Continued to Lhasa']
+      points: ['Solo snow riding', 'Fell, lifted the bike and reset', 'Continued to Lhasa'],
+      media: [
+        { type: 'photo', src: 'assets/travel/tibet-photo-1.jpg', alt: 'Tibet plateau landscape on the road to Lhasa' },
+        { type: 'photo', src: 'assets/travel/tibet-photo-2.jpg', alt: 'Tibet journey — mountain pass scenery' },
+        { type: 'video', src: 'assets/travel/tibet-video.mp4', poster: 'assets/travel/tibet-video-poster.jpg', alt: 'Tibet journey video highlights' }
+      ]
     },
     'sichuan-2025': {
       title: 'Western Sichuan',
@@ -182,7 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
       statusLabel: 'Completed',
       statusClass: 'completed-status',
       desc: 'A completed journey through Western Sichuan, where the landscapes and road conditions kept changing rather than offering only plateau scenery.',
-      points: ['Diverse landscapes', 'Changing road conditions', 'Travel and discoveries along the road']
+      points: ['Diverse landscapes', 'Changing road conditions', 'Travel and discoveries along the road'],
+      media: [
+        { type: 'photo', src: 'assets/travel/sichuan-photo.jpg', alt: 'Western Sichuan journey — changing landscapes' },
+        { type: 'video', src: 'assets/travel/sichuan-video-1.mp4', poster: 'assets/travel/sichuan-video-1-poster.jpg', alt: 'Western Sichuan journey video — part 1' },
+        { type: 'video', src: 'assets/travel/sichuan-video-2.mp4', poster: 'assets/travel/sichuan-video-2-poster.jpg', alt: 'Western Sichuan journey video — part 2' }
+      ]
     },
     'hulunbuir-2026': {
       title: 'Hulunbuir Grasslands and the Greater Khingan Range',
@@ -190,7 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
       statusLabel: 'Planned',
       statusClass: 'planned-status',
       desc: 'A planned September 2026 journey to the Hulunbuir Grasslands and the Greater Khingan Range.',
-      points: ['Hulunbuir Grasslands', 'Greater Khingan Range', 'Journey planned for September 2026']
+      points: ['Hulunbuir Grasslands', 'Greater Khingan Range', 'Journey planned for September 2026'],
+      media: [
+        { type: 'pdf', src: 'assets/travel/hulunbuir-logbook.pdf', alt: 'Hulunbuir Wilderness Moto Logbook' }
+      ]
     }
   };
 
@@ -219,6 +232,33 @@ document.addEventListener('DOMContentLoaded', () => {
         marker.innerHTML = `<i class="fa-solid fa-location-dot"></i><span>${point}</span>`;
         routeStoryPointsEl.appendChild(marker);
       });
+    }
+
+    const galleryEl = document.getElementById('travel-gallery');
+    if (galleryEl) {
+      galleryEl.innerHTML = '';
+      (data.media || []).forEach(item => {
+        if (item.type === 'photo') {
+          const figure = document.createElement('figure');
+          figure.className = 'gallery-item gallery-photo';
+          figure.innerHTML = `<img src="${item.src}" alt="${item.alt}" loading="lazy">`;
+          galleryEl.appendChild(figure);
+        } else if (item.type === 'video') {
+          const figure = document.createElement('figure');
+          figure.className = 'gallery-item gallery-video';
+          figure.innerHTML = `<video controls preload="none" poster="${item.poster}" aria-label="${item.alt}"><source src="${item.src}" type="video/mp4"></video>`;
+          galleryEl.appendChild(figure);
+        } else if (item.type === 'pdf') {
+          const link = document.createElement('a');
+          link.className = 'gallery-item gallery-pdf';
+          link.href = item.src;
+          link.target = '_blank';
+          link.rel = 'noopener';
+          link.innerHTML = `<i class="fa-solid fa-file-pdf"></i><span>${item.alt}</span><i class="fa-solid fa-arrow-up-right-from-square"></i>`;
+          galleryEl.appendChild(link);
+        }
+      });
+      hideDecorativeIcons(galleryEl);
     }
 
     hideDecorativeIcons();

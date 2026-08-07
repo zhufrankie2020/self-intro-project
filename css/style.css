@@ -1233,6 +1233,94 @@ kbd {
   color: var(--accent-indigo);
 }
 
+/* TRAVEL GALLERY */
+.travel-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.gallery-item {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: 0;
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.gallery-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  cursor: zoom-in;
+  transition: transform 0.4s ease;
+}
+
+.gallery-photo:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-video video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #0f172a;
+}
+
+.gallery-pdf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  aspect-ratio: 4 / 3;
+  text-align: center;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.gallery-pdf:hover {
+  background: rgba(99, 102, 241, 0.12);
+  color: #c7d2fe;
+}
+
+.gallery-pdf i:first-child {
+  font-size: 2.2rem;
+  color: var(--accent-indigo);
+}
+
+.gallery-pdf i:last-child {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 1024px) {
+  .travel-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .travel-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* EDUCATION & CONNECT */
 .education-strip,
 .connect-actions {

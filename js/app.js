@@ -230,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const figure = document.createElement('figure');
           figure.className = 'gallery-item gallery-photo';
           figure.innerHTML = `<img src="${item.src}" alt="${item.alt}" loading="lazy">`;
+          figure.addEventListener('click', () => openLightbox(item.src, item.alt));
           galleryEl.appendChild(figure);
         } else if (item.type === 'video') {
           const figure = document.createElement('figure');
@@ -266,6 +267,38 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   renderRoute('tibet-2023');
+
+  /* ------------------------------------------------------------------------
+     4b. LIGHTBOX
+     ------------------------------------------------------------------------ */
+  const lightbox = document.getElementById('travel-lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+
+  function openLightbox(src, alt) {
+    if (!lightbox) return;
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightboxCaption.textContent = alt || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightbox) lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target.classList.contains('lightbox-caption')) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox && lightbox.classList.contains('open')) closeLightbox();
+  });
 
   /* ------------------------------------------------------------------------
      5. COMMAND PALETTE (CMD+K)

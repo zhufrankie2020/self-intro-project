@@ -199,20 +199,14 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'A planned September 2026 journey to the Hulunbuir Grasslands and the Greater Khingan Range.',
       points: ['Hulunbuir Grasslands', 'Greater Khingan Range', 'Journey planned for September 2026'],
       media: [
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-2.jpg', alt: 'Hulunbuir logbook — page 2' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-3.jpg', alt: 'Hulunbuir logbook — page 3' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-4.jpg', alt: 'Hulunbuir logbook — page 4' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-5.jpg', alt: 'Hulunbuir logbook — page 5' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-6.jpg', alt: 'Hulunbuir logbook — page 6' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-7.jpg', alt: 'Hulunbuir logbook — page 7' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-8.jpg', alt: 'Hulunbuir logbook — page 8' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-9.jpg', alt: 'Hulunbuir logbook — page 9' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-10.jpg', alt: 'Hulunbuir logbook — page 10' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-11.jpg', alt: 'Hulunbuir logbook — page 11' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-12.jpg', alt: 'Hulunbuir logbook — page 12' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-13.jpg', alt: 'Hulunbuir logbook — page 13' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-14.jpg', alt: 'Hulunbuir logbook — page 14' },
-        { type: 'photo', src: 'assets/travel/hulunbuir-page-15.jpg', alt: 'Hulunbuir logbook — page 15' }
+        { type: 'photo', src: 'assets/travel/hulunbuir-day-1.jpg', alt: 'Hulunbuir — Day 1' },
+        { type: 'photo', src: 'assets/travel/hulunbuir-day-2.jpg', alt: 'Hulunbuir — Day 2' },
+        { type: 'photo', src: 'assets/travel/hulunbuir-day-3.jpg', alt: 'Hulunbuir — Day 3' },
+        { type: 'photo', src: 'assets/travel/hulunbuir-day-4.jpg', alt: 'Hulunbuir — Day 4' },
+        { type: 'photo', src: 'assets/travel/hulunbuir-day-5.jpg', alt: 'Hulunbuir — Day 5' },
+        { type: 'photo', src: 'assets/travel/hulunbuir-day-6.jpg', alt: 'Hulunbuir — Day 6' },
+        { type: 'photo', src: 'assets/travel/hulunbuir-day-7.jpg', alt: 'Hulunbuir — Day 7' },
+        { type: 'photo', src: 'assets/travel/hulunbuir-day-8.jpg', alt: 'Hulunbuir — Day 8' }
       ]
     }
   };

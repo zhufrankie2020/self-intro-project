@@ -199,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'A planned September 2026 journey to the Hulunbuir Grasslands and the Greater Khingan Range.',
       points: ['Hulunbuir Grasslands', 'Greater Khingan Range', 'Journey planned for September 2026'],
       media: [
+        { type: 'photo', src: 'assets/travel/hulunbuir-day-0.jpg', alt: 'Hulunbuir — Cover' },
         { type: 'photo', src: 'assets/travel/hulunbuir-day-1.jpg', alt: 'Hulunbuir — Day 1' },
         { type: 'photo', src: 'assets/travel/hulunbuir-day-2.jpg', alt: 'Hulunbuir — Day 2' },
         { type: 'photo', src: 'assets/travel/hulunbuir-day-3.jpg', alt: 'Hulunbuir — Day 3' },

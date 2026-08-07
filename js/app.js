@@ -163,9 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
      ------------------------------------------------------------------------ */
   const routeTabs = document.querySelectorAll('.route-tab');
   const routeDetailsEl = document.getElementById('adv-route-details');
-  const routeMapTitleEl = document.getElementById('route-map-title');
-  const routeStatusEl = document.getElementById('route-status');
-  const routeStoryPointsEl = document.getElementById('route-story-points');
 
   const routeData = {
     'tibet-2023': {
@@ -216,22 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="${data.statusClass}">${data.dateLabel}</span>
         <p class="journey-description">${data.desc}</p>
       `;
-    }
-
-    if (routeMapTitleEl) routeMapTitleEl.textContent = `${data.title} — Journey notes`;
-    if (routeStatusEl) {
-      routeStatusEl.className = data.statusClass;
-      routeStatusEl.innerHTML = `<i class="fa-solid ${data.statusLabel === 'Planned' ? 'fa-calendar' : 'fa-circle-check'}"></i> ${data.statusLabel}`;
-    }
-
-    if (routeStoryPointsEl) {
-      routeStoryPointsEl.innerHTML = '';
-      data.points.forEach(point => {
-        const marker = document.createElement('div');
-        marker.className = 'journey-point';
-        marker.innerHTML = `<i class="fa-solid fa-location-dot"></i><span>${point}</span>`;
-        routeStoryPointsEl.appendChild(marker);
-      });
     }
 
     const galleryEl = document.getElementById('travel-gallery');
